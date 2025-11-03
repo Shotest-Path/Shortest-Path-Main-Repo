@@ -2,10 +2,13 @@
 #define CONVEXANDCONCAVE_H
 
 #include <QDialog>
+<<<<<<< HEAD
 #include <map>
 #include "result.h"
 
 using namespace std;
+=======
+>>>>>>> 25b247ca2b94fe8ced1facdc69006b9e4e42179e
 namespace Ui {
 class ConvexAndConcave;
 }

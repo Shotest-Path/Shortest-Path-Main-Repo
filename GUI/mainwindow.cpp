@@ -9,9 +9,9 @@ MainWindow::MainWindow(QWidget *parent)
     , convexAndConcave (new ConvexAndConcave() )
 {
     ui->setupUi(this);
+    shortestPathObject->setWindowTitle("Shortest Path");
     connect(ui->shortestPathButton ,&QPushButton::clicked,this, &MainWindow::showShortestPathWindow );
     connect(ui->convexAndConcaveButton ,&QPushButton::clicked,this, &MainWindow::showConvexAndConcaveWindow );
-
 }
 
 MainWindow::~MainWindow()
