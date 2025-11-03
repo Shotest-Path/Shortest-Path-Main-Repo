@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "shortestpath.h"
+#include "convexandconcave.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,8 +18,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+private slots:
+    void showShortestPathWindow();
+    void showConvexAndConcaveWindow();
 private:
     Ui::MainWindow *ui;
+    ShortestPath *shortestPathObject;
+    ConvexAndConcave *convexAndConcave;
 };
 #endif // MAINWINDOW_H
