@@ -14,6 +14,8 @@ class Result : public QDialog
 public:
     explicit Result(QWidget *parent = nullptr);
     ~Result();
+    QString returnShortestPathResult(QString shortestPathRes);
+    QString shortestPathResult;
 
 private:
     Ui::Result *ui;

@@ -2,7 +2,6 @@
 #define CONVEXANDCONCAVE_H
 
 #include <QDialog>
-
 namespace Ui {
 class ConvexAndConcave;
 }

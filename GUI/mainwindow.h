@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "shortestpath.h"
 #include "convexandconcave.h"
+#include "shortestpath.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
