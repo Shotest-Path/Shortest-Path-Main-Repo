@@ -4,6 +4,7 @@
 ConvexAndConcave::ConvexAndConcave(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ConvexAndConcave)
+    ,resultObject(new Result())
 {
     ui->setupUi(this);
     connect(ui->addPointButton,&QPushButton::clicked,this,&ConvexAndConcave::onAddPointClick);
