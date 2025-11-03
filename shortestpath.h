@@ -2,6 +2,10 @@
 #define SHORTESTPATH_H
 
 #include <QDialog>
+#include <map>
+#include "result.h"
+
+using namespace std;
 
 namespace Ui {
 class ShortestPath;
@@ -14,9 +18,14 @@ class ShortestPath : public QDialog
 public:
     explicit ShortestPath(QWidget *parent = nullptr);
     ~ShortestPath();
-
+    map<char,map<char,double>> ShortestPathGraph;
+    char startNode,endNode;
+private slots:
+    void onAddNodeClick();
+    void onRunClick();
 private:
     Ui::ShortestPath *ui;
+    Result *resultObject;
 };
 
 #endif // SHORTESTPATH_H

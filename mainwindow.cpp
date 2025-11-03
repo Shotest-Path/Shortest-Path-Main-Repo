@@ -20,9 +20,11 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::showShortestPathWindow(){
+    hide();
     shortestPathObject->show();
 }
 
 void MainWindow::showConvexAndConcaveWindow(){
+    hide();
     convexAndConcave->show();
 }
