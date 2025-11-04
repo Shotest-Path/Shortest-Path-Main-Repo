@@ -4,6 +4,7 @@
 ConvexAndConcave::ConvexAndConcave(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ConvexAndConcave)
+    ,resultObject(new Result())
 {
     ui->setupUi(this);
     connect(ui->addPointButton,&QPushButton::clicked,this,&ConvexAndConcave::onAddPointClick);
@@ -21,8 +22,11 @@ void ConvexAndConcave::onAddPointClick()
     double yCoordinate =ui->yCoordinateLineEdit->text().toDouble();
     thePoitsOfHoleGraph[pointName].first=xCoordinate;
     thePoitsOfHoleGraph[pointName].second=yCoordinate;
-
+    ui->pointNameLineEdit->setText("");
+    ui->xCoordinateLineEdit->setText("");
+    ui->yCoordinateLineEdit->setText("");
 }
+
 void ConvexAndConcave::onRunConvexAndConcaveClick()
 {
     startPoint=ui->startPointLineEdit->text().toStdString()[0];
