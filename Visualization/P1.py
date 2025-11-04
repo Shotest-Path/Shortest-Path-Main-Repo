@@ -3,8 +3,28 @@ from manim import *
 class DijkstraVisualization(Scene):
     def construct(self):
         
-# Data_S
-# Data_E
+        # ---------------------- Data ----------------------
+        nodes = ["A", "B", "C", "D", "E"]
+        positions = {
+            "A": [-3, 1, 0],
+            "B": [-1, 2, 0],
+            "C": [1, 1, 0],
+            "D": [0, -1, 0],
+            "E": [3, 0, 0]
+        }
+        edges = [
+            ("A", "B", 2),
+            ("A", "C", 4),
+            ("B", "C", 1),
+            ("B", "D", 7),
+            ("C", "E", 3),
+            ("D", "E", 1),
+            ("A", "D", 8)
+        ]
+        distances = {"A": 0, "B": 2, "C": 3, "D": 8, "E": 6}
+        previous = {"A": "-", "B": "A", "C": "B", "D": "B", "E": "C"}
+        shortest_path = ["A", "B", "C", "E"]
+        # --------------------------------------------------
 
         title = Text("Shortest Path Visualization", weight=BOLD).scale(0.6)
         title.to_edge(UP)
