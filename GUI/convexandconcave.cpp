@@ -17,20 +17,43 @@ ConvexAndConcave::ConvexAndConcave(QWidget *parent)
 }
 void ConvexAndConcave::onAddPointClick()
 {
-    char pointName =ui->pointNameLineEdit->text().toStdString()[0];
-    double xCoordinate =ui->xCoordinateLineEdit->text().toDouble();
-    double yCoordinate =ui->yCoordinateLineEdit->text().toDouble();
-    thePoitsOfHoleGraph[pointName].first=xCoordinate;
-    thePoitsOfHoleGraph[pointName].second=yCoordinate;
-    ui->pointNameLineEdit->setText("");
-    ui->xCoordinateLineEdit->setText("");
-    ui->yCoordinateLineEdit->setText("");
+    if(ui->pointNameLineEdit->text()==""||ui->xCoordinateLineEdit->text()==""||ui->yCoordinateLineEdit->text()=="")
+    {
+        ui->pointNameLineEdit->setPlaceholderText("you must enter point name");
+        ui->pointNameLineEdit->setStyleSheet("QLineEdit::placeholderText{color:red;}");
+    }
+    else
+    {
+        char pointName =ui->pointNameLineEdit->text().toStdString()[0];
+        double xCoordinate =ui->xCoordinateLineEdit->text().toDouble();
+        double yCoordinate =ui->yCoordinateLineEdit->text().toDouble();
+        thePoitsOfHoleGraph[pointName].first=xCoordinate;
+        thePoitsOfHoleGraph[pointName].second=yCoordinate;
+        ui->pointNameLineEdit->setText("");
+        ui->xCoordinateLineEdit->setText("");
+        ui->yCoordinateLineEdit->setText("");
+    }
+
 }
 
 void ConvexAndConcave::onRunConvexAndConcaveClick()
 {
     startPoint=ui->startPointLineEdit->text().toStdString()[0];
     endPoint=ui->endPointLineEdit->text().toStdString()[0];
+    if(ui->concaveRadioButton->isChecked())
+    {
+       //call concave function
+        qDebug()<<"concave";
+    }
+    else if(ui->convexRadioButton->isChecked())
+    {
+        //call convex function
+        qDebug()<<"convex";
+    }
+    else
+    {
+        //error
+    }
     hide();
     resultObject->show();
 }

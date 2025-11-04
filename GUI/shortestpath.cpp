@@ -25,14 +25,26 @@ ShortestPath::~ShortestPath()
 }
 void ShortestPath::onAddNodeClick()
 {
-    char fristNodeName=ui->fristNodeNameLineEdit->text().toStdString()[0];
-    char SecandNode=ui->secondNodeNameLineEdit->text().toStdString()[0];
-    double distance=ui->theEdgeLengthLineEdit->text().toDouble();
-    ShortestPathGraph[fristNodeName][SecandNode]=distance;
-    ShortestPathGraph[SecandNode][fristNodeName]=distance;
-    ui->fristNodeNameLineEdit->setText("");
-    ui->secondNodeNameLineEdit->setText("");
-    ui->theEdgeLengthLineEdit->setText("");
+    if(ui->theEdgeLengthLineEdit->text()==""||ui->secondNodeNameLineEdit->text()==""||ui->fristNodeNameLineEdit->text()=="")
+    {
+        ui->fristNodeNameLineEdit->setPlaceholderText("you must Enter the frist node name");
+        ui->secondNodeNameLineEdit->setPlaceholderText("you must Enter the second node name");
+        ui->theEdgeLengthLineEdit->setPlaceholderText("you must Enter the edage length");
+    }
+    else
+    {
+        ui->fristNodeNameLineEdit->setPlaceholderText("Enter the frist node name");
+        ui->secondNodeNameLineEdit->setPlaceholderText("Enter the second node name");
+        ui->theEdgeLengthLineEdit->setPlaceholderText("Enter the edage length");
+        char fristNodeName=ui->fristNodeNameLineEdit->text().toStdString()[0];
+        char SecandNode=ui->secondNodeNameLineEdit->text().toStdString()[0];
+        double distance=ui->theEdgeLengthLineEdit->text().toDouble();
+        ShortestPathGraph[fristNodeName][SecandNode]=distance;
+        ShortestPathGraph[SecandNode][fristNodeName]=distance;
+        ui->fristNodeNameLineEdit->setText("");
+        ui->secondNodeNameLineEdit->setText("");
+        ui->theEdgeLengthLineEdit->setText("");
+    }
 }
 void ShortestPath::onRunClick()
 {
