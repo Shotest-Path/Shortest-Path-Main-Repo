@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_MULTIMEDIAWIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++1z -Wall -Wextra -fPIC -D_REENTRANT $(DEFINES)
-INCPATH       = -I../../../GUI -I. -I/home/polymath/Qt/6.10.0/gcc_64/include -I/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtGui -I/home/polymath/Qt/6.10.0/gcc_64/include/QtCore -I. -I. -I/home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../../../GUI -I. -I/home/polymath/Qt/6.10.0/gcc_64/include -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia -I/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtGui -I/home/polymath/Qt/6.10.0/gcc_64/include/QtNetwork -I/home/polymath/Qt/6.10.0/gcc_64/include/QtCore -I. -I. -I/home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/polymath/Qt/6.10.0/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = Geometry_App1.0.0
 DISTDIR = /media/windows/workspace/My_Apps/Geometry/GUI/GUI/build/Desktop_Qt_6_10_0-Debug/.tmp/Geometry_App1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/polymath/Qt/6.10.0/gcc_64/lib -Wl,-rpath-link,/home/polymath/Qt/6.10.0/gcc_64/lib
-LIBS          = $(SUBLIBS) /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Widgets.so /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Gui.so /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Core.so -lpthread -lGL   
+LIBS          = $(SUBLIBS) /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6MultimediaWidgets.so /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Multimedia.so /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Widgets.so /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Gui.so /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Network.so /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Core.so -lpthread -lGL   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -55,16 +55,20 @@ OBJECTS_DIR   = ./
 SOURCES       = ../../convexandconcave.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
+		../../pythonrunner.cpp \
 		../../result.cpp moc_convexandconcave.cpp \
 		moc_mainwindow.cpp \
+		moc_pythonrunner.cpp \
 		moc_result.cpp \
 		moc_shortestpath.cpp
 OBJECTS       = convexandconcave.o \
 		main.o \
 		mainwindow.o \
+		pythonrunner.o \
 		result.o \
 		moc_convexandconcave.o \
 		moc_mainwindow.o \
+		moc_pythonrunner.o \
 		moc_result.o \
 		moc_shortestpath.o
 DIST          = /home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/spec_pre.prf \
@@ -304,10 +308,12 @@ DIST          = /home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/lex.prf \
 		../../../../Geometry_App.pro ../../convexandconcave.h \
 		../../mainwindow.h \
+		../../pythonrunner.h \
 		../../result.h \
 		../../shortestpath.h ../../convexandconcave.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
+		../../pythonrunner.cpp \
 		../../result.cpp
 QMAKE_TARGET  = Geometry_App
 DESTDIR       = 
@@ -556,8 +562,11 @@ Makefile: ../../Geometry_App.pro /home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g
 		/home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/yacc.prf \
 		/home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/lex.prf \
 		../../Geometry_App.pro \
+		/home/polymath/Qt/6.10.0/gcc_64/lib/libQt6MultimediaWidgets.prl \
+		/home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Multimedia.prl \
 		/home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Widgets.prl \
 		/home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Gui.prl \
+		/home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Network.prl \
 		/home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Core.prl
 	$(QMAKE) -o Makefile ../../Geometry_App.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 /home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/spec_pre.prf:
@@ -796,8 +805,11 @@ Makefile: ../../Geometry_App.pro /home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g
 /home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/yacc.prf:
 /home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/lex.prf:
 ../../Geometry_App.pro:
+/home/polymath/Qt/6.10.0/gcc_64/lib/libQt6MultimediaWidgets.prl:
+/home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Multimedia.prl:
 /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Widgets.prl:
 /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Gui.prl:
+/home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Network.prl:
 /home/polymath/Qt/6.10.0/gcc_64/lib/libQt6Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../../Geometry_App.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
@@ -814,8 +826,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../convexandconcave.h ../../mainwindow.h ../../result.h ../../shortestpath.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../ShortestPathAlgo-Dijstra.cpp ../../convexandconcave.cpp ../../exportResultFile.cpp ../../main.cpp ../../mainwindow.cpp ../../result.cpp ../../shortestpath.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../convexandconcave.h ../../mainwindow.h ../../pythonrunner.h ../../result.h ../../shortestpath.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../ShortestPathAlgo-Dijstra.cpp ../../convexandconcave.cpp ../../exportResultFile.cpp ../../main.cpp ../../mainwindow.cpp ../../pythonrunner.cpp ../../result.cpp ../../shortestpath.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../convexandconcave.ui ../../mainwindow.ui ../../result.ui ../../shortestpath.ui $(DISTDIR)/
 
 
@@ -848,9 +860,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++1z -Wall -Wextra -fPIC -dM -E -o moc_predefs.h /home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_convexandconcave.cpp moc_mainwindow.cpp moc_result.cpp moc_shortestpath.cpp
+compiler_moc_header_make_all: moc_convexandconcave.cpp moc_mainwindow.cpp moc_pythonrunner.cpp moc_result.cpp moc_shortestpath.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_convexandconcave.cpp moc_mainwindow.cpp moc_result.cpp moc_shortestpath.cpp
+	-$(DEL_FILE) moc_convexandconcave.cpp moc_mainwindow.cpp moc_pythonrunner.cpp moc_result.cpp moc_shortestpath.cpp
 moc_convexandconcave.cpp: ../../convexandconcave.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QDialog \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qdialog.h \
@@ -1051,9 +1063,23 @@ moc_convexandconcave.cpp: ../../convexandconcave.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qlocale.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qguiapplication_platform.h \
 		../../result.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QMainWindow \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaexports.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/QVideoWidget \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qvideowidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsexports.h \
 		moc_predefs.h \
 		/home/polymath/Qt/6.10.0/gcc_64/libexec/moc
-	/home/polymath/Qt/6.10.0/gcc_64/libexec/moc $(DEFINES) --include /media/windows/workspace/My_Apps/Geometry/GUI/GUI/build/Desktop_Qt_6_10_0-Debug/moc_predefs.h -I/home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g++ -I/media/windows/workspace/My_Apps/Geometry/GUI/GUI -I/home/polymath/Qt/6.10.0/gcc_64/include -I/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtGui -I/home/polymath/Qt/6.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/14 -I/usr/include/x86_64-linux-gnu/c++/14 -I/usr/include/c++/14/backward -I/usr/lib/gcc/x86_64-linux-gnu/14/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../convexandconcave.h -o moc_convexandconcave.cpp
+	/home/polymath/Qt/6.10.0/gcc_64/libexec/moc $(DEFINES) --include /media/windows/workspace/My_Apps/Geometry/GUI/GUI/build/Desktop_Qt_6_10_0-Debug/moc_predefs.h -I/home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g++ -I/media/windows/workspace/My_Apps/Geometry/GUI/GUI -I/home/polymath/Qt/6.10.0/gcc_64/include -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia -I/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtGui -I/home/polymath/Qt/6.10.0/gcc_64/include/QtNetwork -I/home/polymath/Qt/6.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/14 -I/usr/include/x86_64-linux-gnu/c++/14 -I/usr/include/c++/14/backward -I/usr/lib/gcc/x86_64-linux-gnu/14/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../convexandconcave.h -o moc_convexandconcave.cpp
 
 moc_mainwindow.cpp: ../../mainwindow.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QMainWindow \
@@ -1259,13 +1285,160 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QDialog \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qdialog.h \
 		../../result.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaexports.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/QVideoWidget \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qvideowidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsexports.h \
 		../../shortestpath.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QTime \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdatetime.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcalendar.h \
+		../../pythonrunner.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QProcess \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qprocess.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QDebug \
 		moc_predefs.h \
 		/home/polymath/Qt/6.10.0/gcc_64/libexec/moc
-	/home/polymath/Qt/6.10.0/gcc_64/libexec/moc $(DEFINES) --include /media/windows/workspace/My_Apps/Geometry/GUI/GUI/build/Desktop_Qt_6_10_0-Debug/moc_predefs.h -I/home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g++ -I/media/windows/workspace/My_Apps/Geometry/GUI/GUI -I/home/polymath/Qt/6.10.0/gcc_64/include -I/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtGui -I/home/polymath/Qt/6.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/14 -I/usr/include/x86_64-linux-gnu/c++/14 -I/usr/include/c++/14/backward -I/usr/lib/gcc/x86_64-linux-gnu/14/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
+	/home/polymath/Qt/6.10.0/gcc_64/libexec/moc $(DEFINES) --include /media/windows/workspace/My_Apps/Geometry/GUI/GUI/build/Desktop_Qt_6_10_0-Debug/moc_predefs.h -I/home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g++ -I/media/windows/workspace/My_Apps/Geometry/GUI/GUI -I/home/polymath/Qt/6.10.0/gcc_64/include -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia -I/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtGui -I/home/polymath/Qt/6.10.0/gcc_64/include/QtNetwork -I/home/polymath/Qt/6.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/14 -I/usr/include/x86_64-linux-gnu/c++/14 -I/usr/include/c++/14/backward -I/usr/lib/gcc/x86_64-linux-gnu/14/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
+
+moc_pythonrunner.cpp: ../../pythonrunner.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QObject \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qobject.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qnamespace.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtcoreglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtversionchecks.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtconfiginclude.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qconfig.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtcore-config.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtconfigmacros.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtdeprecationdefinitions.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtcoreexports.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qassert.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtnoop.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtypes.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtversion.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qsysinfo.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qlogging.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qflags.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcompare_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qatomic.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qyieldcpu.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qconstructormacros.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qexceptionhandling.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qforeach.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qttypetraits.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qfunctionpointer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qmalloc.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qminmax.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qnumeric.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/q20type_traits.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qoverload.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qswap.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtresource.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qttranslation.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qversiontagging.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcompare.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstdlibdetection.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcomparehelpers.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtmetamacros.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstring.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qchar.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringview.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbytearray.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qrefcount.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qarraydata.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qpair.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qarraydataops.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qxptype_traits.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/q20functional.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/q20memory.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/q17memory.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbytearrayview.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringfwd.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringliteral.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qlatin1stringview.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qanystringview.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qutf8stringview.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringtokenizer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringconverter.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringconverter_base.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qlist.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qiterator.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringlist.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qalgorithms.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcoreevent.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbasictimer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qeventloop.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qmetatype.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdatastream.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qiodevicebase.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qfloat16.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qmath.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtformat_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qiterable.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qmetacontainer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcontainerinfo.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtaggedpointer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qscopeguard.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qobject_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbindingstorage.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QProcess \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qprocess.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qiodevice.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qspan.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/q20iterator.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qshareddata.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QDebug \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdebug.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtextstream.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qmap.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qshareddata_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qset.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qhash.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qalloc.h \
+		moc_predefs.h \
+		/home/polymath/Qt/6.10.0/gcc_64/libexec/moc
+	/home/polymath/Qt/6.10.0/gcc_64/libexec/moc $(DEFINES) --include /media/windows/workspace/My_Apps/Geometry/GUI/GUI/build/Desktop_Qt_6_10_0-Debug/moc_predefs.h -I/home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g++ -I/media/windows/workspace/My_Apps/Geometry/GUI/GUI -I/home/polymath/Qt/6.10.0/gcc_64/include -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia -I/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtGui -I/home/polymath/Qt/6.10.0/gcc_64/include/QtNetwork -I/home/polymath/Qt/6.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/14 -I/usr/include/x86_64-linux-gnu/c++/14 -I/usr/include/c++/14/backward -I/usr/lib/gcc/x86_64-linux-gnu/14/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../pythonrunner.h -o moc_pythonrunner.cpp
 
 moc_result.cpp: ../../result.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QDialog \
@@ -1466,9 +1639,23 @@ moc_result.cpp: ../../result.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qinputmethod.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qlocale.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qguiapplication_platform.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QMainWindow \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaexports.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/QVideoWidget \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qvideowidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsexports.h \
 		moc_predefs.h \
 		/home/polymath/Qt/6.10.0/gcc_64/libexec/moc
-	/home/polymath/Qt/6.10.0/gcc_64/libexec/moc $(DEFINES) --include /media/windows/workspace/My_Apps/Geometry/GUI/GUI/build/Desktop_Qt_6_10_0-Debug/moc_predefs.h -I/home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g++ -I/media/windows/workspace/My_Apps/Geometry/GUI/GUI -I/home/polymath/Qt/6.10.0/gcc_64/include -I/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtGui -I/home/polymath/Qt/6.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/14 -I/usr/include/x86_64-linux-gnu/c++/14 -I/usr/include/c++/14/backward -I/usr/lib/gcc/x86_64-linux-gnu/14/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../result.h -o moc_result.cpp
+	/home/polymath/Qt/6.10.0/gcc_64/libexec/moc $(DEFINES) --include /media/windows/workspace/My_Apps/Geometry/GUI/GUI/build/Desktop_Qt_6_10_0-Debug/moc_predefs.h -I/home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g++ -I/media/windows/workspace/My_Apps/Geometry/GUI/GUI -I/home/polymath/Qt/6.10.0/gcc_64/include -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia -I/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtGui -I/home/polymath/Qt/6.10.0/gcc_64/include/QtNetwork -I/home/polymath/Qt/6.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/14 -I/usr/include/x86_64-linux-gnu/c++/14 -I/usr/include/c++/14/backward -I/usr/lib/gcc/x86_64-linux-gnu/14/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../result.h -o moc_result.cpp
 
 moc_shortestpath.cpp: ../../shortestpath.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QDialog \
@@ -1670,12 +1857,30 @@ moc_shortestpath.cpp: ../../shortestpath.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qlocale.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qguiapplication_platform.h \
 		../../result.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QMainWindow \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaexports.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/QVideoWidget \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qvideowidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsexports.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QTime \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdatetime.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcalendar.h \
+		../../pythonrunner.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QProcess \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qprocess.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QDebug \
 		moc_predefs.h \
 		/home/polymath/Qt/6.10.0/gcc_64/libexec/moc
-	/home/polymath/Qt/6.10.0/gcc_64/libexec/moc $(DEFINES) --include /media/windows/workspace/My_Apps/Geometry/GUI/GUI/build/Desktop_Qt_6_10_0-Debug/moc_predefs.h -I/home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g++ -I/media/windows/workspace/My_Apps/Geometry/GUI/GUI -I/home/polymath/Qt/6.10.0/gcc_64/include -I/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtGui -I/home/polymath/Qt/6.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/14 -I/usr/include/x86_64-linux-gnu/c++/14 -I/usr/include/c++/14/backward -I/usr/lib/gcc/x86_64-linux-gnu/14/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../shortestpath.h -o moc_shortestpath.cpp
+	/home/polymath/Qt/6.10.0/gcc_64/libexec/moc $(DEFINES) --include /media/windows/workspace/My_Apps/Geometry/GUI/GUI/build/Desktop_Qt_6_10_0-Debug/moc_predefs.h -I/home/polymath/Qt/6.10.0/gcc_64/mkspecs/linux-g++ -I/media/windows/workspace/My_Apps/Geometry/GUI/GUI -I/home/polymath/Qt/6.10.0/gcc_64/include -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia -I/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets -I/home/polymath/Qt/6.10.0/gcc_64/include/QtGui -I/home/polymath/Qt/6.10.0/gcc_64/include/QtNetwork -I/home/polymath/Qt/6.10.0/gcc_64/include/QtCore -I. -I/usr/include/c++/14 -I/usr/include/x86_64-linux-gnu/c++/14 -I/usr/include/c++/14/backward -I/usr/lib/gcc/x86_64-linux-gnu/14/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../shortestpath.h -o moc_shortestpath.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1910,6 +2115,20 @@ convexandconcave.o: ../../convexandconcave.cpp ../../convexandconcave.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qlocale.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qguiapplication_platform.h \
 		../../result.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QMainWindow \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaexports.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/QVideoWidget \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qvideowidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsexports.h \
 		ui_convexandconcave.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QVariant \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QApplication \
@@ -1935,7 +2154,12 @@ convexandconcave.o: ../../convexandconcave.cpp ../../convexandconcave.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qabstractbutton.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QRadioButton \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qradiobutton.h \
-		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QSpacerItem
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QSpacerItem \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QErrorMessage \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qerrormessage.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QMessageBox \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qdialogbuttonbox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o convexandconcave.o ../../convexandconcave.cpp
 
 main.o: ../../main.cpp ../../mainwindow.h \
@@ -2142,10 +2366,25 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QDialog \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qdialog.h \
 		../../result.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaexports.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/QVideoWidget \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qvideowidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsexports.h \
 		../../shortestpath.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QTime \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdatetime.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcalendar.h \
+		../../pythonrunner.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QProcess \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qprocess.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QDebug \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QApplication \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
@@ -2354,10 +2593,25 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QDialog \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qdialog.h \
 		../../result.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaexports.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/QVideoWidget \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qvideowidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsexports.h \
 		../../shortestpath.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QTime \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdatetime.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcalendar.h \
+		../../pythonrunner.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QProcess \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qprocess.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QDebug \
 		ui_mainwindow.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QVariant \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QApplication \
@@ -2378,6 +2632,136 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qgridlayout.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../../mainwindow.cpp
+
+pythonrunner.o: ../../pythonrunner.cpp ../../pythonrunner.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QObject \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qobject.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qnamespace.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtcoreglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtversionchecks.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtconfiginclude.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qconfig.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtcore-config.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtconfigmacros.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtdeprecationdefinitions.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtcoreexports.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qassert.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtnoop.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtypes.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtversion.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qsysinfo.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qlogging.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qflags.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcompare_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qatomic.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qyieldcpu.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qconstructormacros.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qexceptionhandling.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qforeach.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qttypetraits.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qfunctionpointer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qmalloc.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qminmax.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qnumeric.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/q20type_traits.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qoverload.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qswap.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtresource.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qttranslation.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qversiontagging.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcompare.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstdlibdetection.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcomparehelpers.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtmetamacros.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qfunctionaltools_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstring.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qchar.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringview.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbytearray.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qrefcount.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qarraydata.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qpair.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qarraydatapointer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qarraydataops.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qxptype_traits.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/q20functional.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/q20memory.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/q17memory.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbytearrayview.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringfwd.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringliteral.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qlatin1stringview.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qanystringview.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qutf8stringview.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringtokenizer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringconverter.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringconverter_base.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qlist.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qiterator.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringlist.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qalgorithms.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcoreevent.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbasictimer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qeventloop.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdeadlinetimer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qmetatype.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdatastream.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qiodevicebase.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qfloat16.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qmath.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtformat_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qiterable.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qmetacontainer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcontainerinfo.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtaggedpointer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qscopeguard.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qobject_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qbindingstorage.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QProcess \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qprocess.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qiodevice.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qspan.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/q20iterator.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qshareddata.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QDebug \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdebug.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtextstream.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qmap.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qshareddata_impl.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qset.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qhash.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qalloc.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pythonrunner.o ../../pythonrunner.cpp
 
 result.o: ../../result.cpp ../../result.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QDialog \
@@ -2578,42 +2962,76 @@ result.o: ../../result.cpp ../../result.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qinputmethod.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qlocale.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qguiapplication_platform.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QMainWindow \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qmainwindow.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtmultimediaexports.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qtaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimedia/qaudio.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/QVideoWidget \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qvideowidget.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsglobal.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtMultimediaWidgets/qtmultimediawidgetsexports.h \
 		ui_result.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QVariant \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QApplication \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qapplication.h \
-		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QHBoxLayout \
-		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QGridLayout \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qgridlayout.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qlayout.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qgridlayout.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QHBoxLayout \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QLabel \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qlabel.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qframe.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qpicture.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qtextdocument.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QPushButton \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QVBoxLayout \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QWidget \
 		../../shortestpath.cpp \
 		../../shortestpath.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QTime \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdatetime.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qcalendar.h \
+		../../pythonrunner.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QProcess \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qprocess.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QDebug \
 		ui_shortestpath.h \
-		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QGridLayout \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QLineEdit \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qlineedit.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qtextcursor.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qtextformat.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qpen.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtGui/qtextoption.h \
-		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QPushButton \
-		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qpushbutton.h \
-		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qabstractbutton.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QSpacerItem \
 		../../ShortestPathAlgo-Dijstra.cpp \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QTimer \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtimer.h \
-		../../exportResultFile.cpp
+		../../exportResultFile.cpp \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QDir \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdir.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qdirlisting.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qfiledevice.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qfile.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qfileinfo.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/qtimezone.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QFile \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QTextStream \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QCoreApplication \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QMessageBox \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qmessagebox.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qdialogbuttonbox.h \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QFileDialog \
+		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/qfiledialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o result.o ../../result.cpp
 
 moc_convexandconcave.o: moc_convexandconcave.cpp 
@@ -2621,6 +3039,9 @@ moc_convexandconcave.o: moc_convexandconcave.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_pythonrunner.o: moc_pythonrunner.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_pythonrunner.o moc_pythonrunner.cpp
 
 moc_result.o: moc_result.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_result.o moc_result.cpp

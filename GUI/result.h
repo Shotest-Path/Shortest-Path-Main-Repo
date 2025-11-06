@@ -2,6 +2,9 @@
 #define RESULT_H
 
 #include <QDialog>
+#include <QMainWindow>
+#include <QMediaPlayer>
+#include <QVideoWidget>
 
 namespace Ui {
 class Result;
@@ -19,6 +22,8 @@ public:
 
 private:
     Ui::Result *ui;
+    QMediaPlayer *player;
+    QVideoWidget *videoWidget;
 };
 
 #endif // RESULT_H

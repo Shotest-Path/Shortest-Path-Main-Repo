@@ -6,6 +6,7 @@
 #include <vector>
 #include "result.h"
 #include <QTime>
+#include "pythonrunner.h"
 using namespace std;
 
 namespace Ui {
@@ -33,6 +34,7 @@ private:
     Ui::ShortestPath *ui;
     Result *resultObject;
     QTimer *time;
+    PythonRunner pythonRunRunRun;
 };
 
 #endif // SHORTESTPATH_H

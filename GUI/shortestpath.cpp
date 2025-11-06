@@ -3,15 +3,16 @@
 #include "result.h"
 #include "ShortestPathAlgo-Dijstra.cpp"
 #include "result.h"
-// #include <QTimer>
+#include <QTimer>
 #include "exportResultFile.cpp"
 #include <QMessageBox>
-
+#include "pythonrunner.h"
 using namespace std;
 ShortestPath::ShortestPath(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ShortestPath)
     ,resultObject(new Result())
+    ,pythonRunRunRun(PythonRunner())
 {
     ui->setupUi(this);
     connect(ui->addNodeButton,&QPushButton::clicked,this,&ShortestPath::onAddNodeClick);
@@ -84,10 +85,10 @@ void ShortestPath::onRunClick()
 
     QString shortestPathTextGlobal =  QString::fromStdString(shortestPathText);
 
-    // time = new QTimer(this);
-    // time->start();
-
-    // time->stop();
+    time = new QTimer(this);
+    time->start();
+    pythonRunRunRun.start();
+    time->stop();
     hide();
     resultObject->returnShortestPathResult(shortestPathTextGlobal);
     resultObject->show();

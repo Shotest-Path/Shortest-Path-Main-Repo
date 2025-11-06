@@ -79,7 +79,11 @@ void exportResultFile(const map<char, map<char, double>>& ShortestPathGraph,
         outputFile << "\"" << QString(1, element) << "\",";
     }
     outputFile << "]\n";
-
+    // positions = {
+    //     "A": [-3, 1, 0],
+    //     "B": [-1, 2, 0],
+    //     "C": [1, 1, 0],
+    // }
+    outputFile << "        positions = {\"A\": [0, 0, 0],\"B\": [3, 0, 0],\"C\": [3, 4, 0]}";
     file.close();
-    qDebug() << "Wrote file to:" << filePath;
 }
