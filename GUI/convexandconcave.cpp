@@ -1,5 +1,7 @@
 #include "convexandconcave.h"
 #include "ui_convexandconcave.h"
+#include <QErrorMessage>
+#include <QMessageBox>
 
 ConvexAndConcave::ConvexAndConcave(QWidget *parent)
     : QDialog(parent)
@@ -20,10 +22,15 @@ void ConvexAndConcave::onAddPointClick()
     if(ui->pointNameLineEdit->text()==""||ui->xCoordinateLineEdit->text()==""||ui->yCoordinateLineEdit->text()=="")
     {
         ui->pointNameLineEdit->setPlaceholderText("you must enter point name");
-        ui->pointNameLineEdit->setStyleSheet("QLineEdit::placeholderText{color:red;}");
+        ui->xCoordinateLineEdit->setPlaceholderText("you must Enter the x Coordinate");
+        ui->yCoordinateLineEdit->setPlaceholderText("you must Enter the y Coordinate");
+        QMessageBox::critical(nullptr, "Error", "you must Enter all feild");
     }
     else
     {
+        ui->pointNameLineEdit->setPlaceholderText("Enter the point name");
+        ui->xCoordinateLineEdit->setPlaceholderText("Enter the x Coordinate");
+        ui->yCoordinateLineEdit->setPlaceholderText("Enter the y Coordinate");
         char pointName =ui->pointNameLineEdit->text().toStdString()[0];
         double xCoordinate =ui->xCoordinateLineEdit->text().toDouble();
         double yCoordinate =ui->yCoordinateLineEdit->text().toDouble();
@@ -38,24 +45,35 @@ void ConvexAndConcave::onAddPointClick()
 
 void ConvexAndConcave::onRunConvexAndConcaveClick()
 {
-    startPoint=ui->startPointLineEdit->text().toStdString()[0];
-    endPoint=ui->endPointLineEdit->text().toStdString()[0];
+
     if(ui->concaveRadioButton->isChecked())
     {
        //call concave function
         qDebug()<<"concave";
+       hide();
+       resultObject->show();
     }
     else if(ui->convexRadioButton->isChecked())
     {
         //call convex function
         qDebug()<<"convex";
+        hide();
+        resultObject->show();
     }
     else
     {
-        //error
+        QMessageBox::critical(nullptr, "Error", "An unselectead polgon Type error occurred!");
     }
-    hide();
-    resultObject->show();
+    if(ui->startPointLineEdit->text()==""||ui->endPointLineEdit->text()=="")
+    {
+        QMessageBox::critical(nullptr, "Error", "you must add starting and end points");
+    }
+    else
+    {
+        startPoint=ui->startPointLineEdit->text().toStdString()[0];
+        endPoint=ui->endPointLineEdit->text().toStdString()[0];
+
+    }
 }
 ConvexAndConcave::~ConvexAndConcave()
 {

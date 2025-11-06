@@ -18,5 +18,6 @@ Result::~Result()
 
 QString Result::returnShortestPathResult(QString shortestPathRes){
     shortestPathResult = shortestPathRes;
+    ui->shortestPathResultLabel->setText(shortestPathRes);
     return shortestPathRes;
 }

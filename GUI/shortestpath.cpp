@@ -3,8 +3,9 @@
 #include "result.h"
 #include "ShortestPathAlgo-Dijstra.cpp"
 #include "result.h"
-#include <QTimer>
+// #include <QTimer>
 #include "exportResultFile.cpp"
+#include <QMessageBox>
 
 using namespace std;
 ShortestPath::ShortestPath(QWidget *parent)
@@ -33,6 +34,7 @@ void ShortestPath::onAddNodeClick()
         ui->fristNodeNameLineEdit->setPlaceholderText("you must Enter the frist node name");
         ui->secondNodeNameLineEdit->setPlaceholderText("you must Enter the second node name");
         ui->theEdgeLengthLineEdit->setPlaceholderText("you must Enter the edage length");
+        QMessageBox::critical(nullptr, "Error", "you must Enter all feild");
     }
     else
     {
@@ -51,6 +53,12 @@ void ShortestPath::onAddNodeClick()
 }
 void ShortestPath::onRunClick()
 {
+    if(ui->startNodeLineEdit->text()==""||ui->endNodeLineEdit->text()=="")
+    {
+        QMessageBox::critical(nullptr, "Error", "you must add starting and end nodes");
+    }
+    else
+    {
     startNode=ui->startNodeLineEdit->text().toStdString()[0];
     endNode=ui->endNodeLineEdit->text().toStdString()[0];
 
@@ -76,11 +84,12 @@ void ShortestPath::onRunClick()
 
     QString shortestPathTextGlobal =  QString::fromStdString(shortestPathText);
 
-    time = new QTimer(this);
-    time->start();
+    // time = new QTimer(this);
+    // time->start();
 
-    time->stop();
+    // time->stop();
     hide();
-    // resultObject->returnShortestPathResult(shortestPathTextGlobal);
+    resultObject->returnShortestPathResult(shortestPathTextGlobal);
     resultObject->show();
+    }
 }
