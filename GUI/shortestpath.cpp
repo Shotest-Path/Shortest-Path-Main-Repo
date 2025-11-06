@@ -3,7 +3,10 @@
 #include "result.h"
 #include "ShortestPathAlgo-Dijstra.cpp"
 #include "result.h"
+#include <QTimer>
+#include "exportResultFile.cpp"
 
+using namespace std;
 ShortestPath::ShortestPath(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ShortestPath)
@@ -63,8 +66,21 @@ void ShortestPath::onRunClick()
     for(auto i : shortest_path){
        shortestPathText += i + ' ';
     }
+
+    exportResultFile(
+        ShortestPathGraph,
+        distances,
+        prev,
+        shortest_path
+        );
+
     QString shortestPathTextGlobal =  QString::fromStdString(shortestPathText);
+
+    time = new QTimer(this);
+    time->start();
+
+    time->stop();
     hide();
-    resultObject->returnShortestPathResult(shortestPathTextGlobal);
+    // resultObject->returnShortestPathResult(shortestPathTextGlobal);
     resultObject->show();
 }

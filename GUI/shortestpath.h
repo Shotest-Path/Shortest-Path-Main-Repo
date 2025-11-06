@@ -5,7 +5,7 @@
 #include <map>
 #include <vector>
 #include "result.h"
-
+#include <QTime>
 using namespace std;
 
 namespace Ui {
@@ -25,12 +25,14 @@ public:
     map<char, char> prev;
     vector<char> shortest_path;
     string shortestPathText;
+
 private slots:
     void onAddNodeClick();
     void onRunClick();
 private:
     Ui::ShortestPath *ui;
     Result *resultObject;
+    QTimer *time;
 };
 
 #endif // SHORTESTPATH_H

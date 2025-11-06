@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     ShortestPathAlgo-Dijstra.cpp \
     convexandconcave.cpp \
+    exportResultFile.cpp \
     main.cpp \
     mainwindow.cpp \
     result.cpp \
