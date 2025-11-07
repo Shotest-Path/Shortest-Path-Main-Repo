@@ -117,6 +117,11 @@
       </item>
       <item>
        <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Shortest Path: </string>
         </property>
@@ -124,6 +129,11 @@
       </item>
       <item>
        <widget class="QLabel" name="shortestPathResultLabel">
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Shortest Path</string>
         </property>

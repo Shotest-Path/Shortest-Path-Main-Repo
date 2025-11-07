@@ -27,7 +27,7 @@ Result::Result(QWidget *parent)
     ui->verticalLayout->addWidget(videoWidget);
     player->setVideoOutput(videoWidget);
 
-    QString path = "../../../Visualization/media/videos/main_animation/1080p60/DijkstraVisualization.mp4";
+    QString path = "../../../Visualization/media/videos/main_animation/720p30/DijkstraVisualization.mp4";
 
     if (!path.isEmpty()) {
         player->setSource(QUrl::fromLocalFile(path));

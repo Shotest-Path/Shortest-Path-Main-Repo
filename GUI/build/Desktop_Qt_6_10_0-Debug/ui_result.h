@@ -106,11 +106,15 @@ public:
 
         label = new QLabel(horizontalLayoutWidget_3);
         label->setObjectName("label");
+        QFont font;
+        font.setPointSize(15);
+        label->setFont(font);
 
         horizontalLayout_4->addWidget(label);
 
         shortestPathResultLabel = new QLabel(horizontalLayoutWidget_3);
         shortestPathResultLabel->setObjectName("shortestPathResultLabel");
+        shortestPathResultLabel->setFont(font);
 
         horizontalLayout_4->addWidget(shortestPathResultLabel);
 

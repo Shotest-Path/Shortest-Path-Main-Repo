@@ -1,13 +1,11 @@
 #ifndef GRAPH_GEOMETRY_H
 #define GRAPH_GEOMETRY_H
-
-#include <iostream>
 #include <map>
 #include <array>
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
-
+#include <array>
 class GraphGeometry {
 public:
     // Returns true if distance found between two nodes
@@ -41,63 +39,22 @@ public:
     static std::map<char, std::array<double, 3>> generateNodePositions(
         const std::map<char, std::map<char, double>>& graph
         ) {
-        std::map<char, std::array<double, 3>> positions;
-        if (graph.empty()) return positions;
+        std::map<char, std::array<double, 3>> points;
+        if (graph.empty()) return points;
 
-        std::srand(static_cast<unsigned>(std::time(nullptr)));
+        int n = graph.size();
+        double radius = 10.0;
+        double angleStep = 2.0 * M_PI / n;
 
-        // Step 1: choose first node (A)
-        char first = graph.begin()->first;
-        positions[first] = {0.0, 0.0, 0.0};
-
-        // Step 2: find a neighbor (B)
-        char second = 0;
-        double dAB = 0.0;
-        for (auto& [neighbor, dist] : graph.at(first)) {
-            second = neighbor;
-            dAB = dist;
-            break;
+        int i = 0;
+        for (auto& [node, _] : graph) {
+            double angle = i * angleStep;
+            double x = radius * cos(angle);
+            double y = radius * sin(angle);
+            points[node] = {x, y, 0.0};
+            i++;
         }
-
-        if (second == 0) {
-            std::cerr << "Warning: graph too small.\n";
-            return positions;
-        }
-
-        positions[second] = {dAB, 0.0, 0.0};
-
-        // Step 3: place the rest of the nodes
-        for (auto& [node, edges] : graph) {
-            if (positions.count(node)) continue; // already placed
-
-            double dToA, dToB;
-            bool hasA = getDistanceBetweenNodes(graph, node, first, dToA);
-            bool hasB = getDistanceBetweenNodes(graph, node, second, dToB);
-
-            double x, y;
-
-            if (hasA && hasB) {
-                // Check if geometry possible
-                if (dToA + dToB > dAB && std::fabs(dToA - dToB) < dAB) {
-                    // Law of cosines
-                    x = (std::pow(dToA, 2) - std::pow(dToB, 2) + std::pow(dAB, 2)) / (2 * dAB);
-                    double ySquared = std::pow(dToA, 2) - std::pow(x, 2);
-                    y = (ySquared > 0) ? std::sqrt(ySquared) : 0.0;
-                } else {
-                    // Impossible triangle → approximate placement
-                    x = (double)(std::rand() % 20) - 10.0;
-                    y = (double)(std::rand() % 20) - 10.0;
-                }
-            } else {
-                // Missing distances → approximate placement
-                x = (double)(std::rand() % 20) - 10.0;
-                y = (double)(std::rand() % 20) - 10.0;
-            }
-
-            positions[node] = {x, y, 0.0};
-        }
-
-        return positions;
+        return points;
     }
 };
 

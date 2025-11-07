@@ -1,6 +1,5 @@
 from manim import *
 import numpy as np
-
 class DijkstraVisualization(Scene):
     def construct(self):
         

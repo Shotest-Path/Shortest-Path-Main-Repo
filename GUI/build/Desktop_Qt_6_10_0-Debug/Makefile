@@ -53,7 +53,6 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../convexandconcave.cpp \
-		../../generateTheCoordinates.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../pythonrunner.cpp \
@@ -63,7 +62,6 @@ SOURCES       = ../../convexandconcave.cpp \
 		moc_result.cpp \
 		moc_shortestpath.cpp
 OBJECTS       = convexandconcave.o \
-		generateTheCoordinates.o \
 		main.o \
 		mainwindow.o \
 		pythonrunner.o \
@@ -314,7 +312,6 @@ DIST          = /home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/spec_pre.prf \
 		../../pythonrunner.h \
 		../../result.h \
 		../../shortestpath.h ../../convexandconcave.cpp \
-		../../generateTheCoordinates.cpp \
 		../../main.cpp \
 		../../mainwindow.cpp \
 		../../pythonrunner.cpp \
@@ -831,7 +828,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /home/polymath/Qt/6.10.0/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../convexandconcave.h ../../generateTheCoordinates.h ../../mainwindow.h ../../pythonrunner.h ../../result.h ../../shortestpath.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../ConvexAndConCaveDrawAlgo.cpp ../../ShortestPathAlgo-Dijstra.cpp ../../convexandconcave.cpp ../../exportResultFile.cpp ../../generateTheCoordinates.cpp ../../main.cpp ../../mainwindow.cpp ../../pythonrunner.cpp ../../result.cpp ../../shortestpath.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../ConvexAndConCaveDrawAlgo.cpp ../../ShortestPathAlgo-Dijstra.cpp ../../convexandconcave.cpp ../../exportResultFile.cpp ../../main.cpp ../../mainwindow.cpp ../../pythonrunner.cpp ../../result.cpp ../../shortestpath.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../convexandconcave.ui ../../mainwindow.ui ../../result.ui ../../shortestpath.ui $(DISTDIR)/
 
 
@@ -2373,9 +2370,6 @@ convexandconcave.o: ../../convexandconcave.cpp ../../convexandconcave.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtCore/QDebug \
 		../../generateTheCoordinates.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o convexandconcave.o ../../convexandconcave.cpp
-
-generateTheCoordinates.o: ../../generateTheCoordinates.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o generateTheCoordinates.o ../../generateTheCoordinates.cpp
 
 main.o: ../../main.cpp ../../mainwindow.h \
 		/home/polymath/Qt/6.10.0/gcc_64/include/QtWidgets/QMainWindow \

@@ -53,11 +53,11 @@ void PythonRunner::runNext()
         process->setWorkingDirectory("../../../Visualization");
 
         if (script.contains("main_animation.py", Qt::CaseInsensitive)) {
-            process->start("python3", QStringList()
-                           << "-m" << "manim"
-                           << "-qh"
-                           << script
-                           << "DijkstraVisualization");
+            process->start("manim", QStringList()
+                           // << "-p"
+                           << "-qm"
+                           << "main_animation.py"
+                           << "DijkstraVisualization");// manim -p -qh main_animation.py DijkstraVisualization
         } else {
             process->start("python3", QStringList() << script);
         }
