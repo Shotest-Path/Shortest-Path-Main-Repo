@@ -5,7 +5,7 @@
 #include <stack>
 using namespace std;
 
-void dijkstra(
+inline void dijkstra(
     map<char, map<char, double>>& graph,
     char start,
     char end,
