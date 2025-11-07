@@ -1,41 +1,98 @@
 #include "pythonrunner.h"
+#include <QDebug>
 
 PythonRunner::PythonRunner(QObject *parent)
-    : QObject(parent), process(new QProcess(this)), currentIndex(0)
+    : QObject(parent), process(new QProcess(this)), currentIndex(0),
+    output(nullptr), labelOutput(nullptr)
 {
+    process->setProcessChannelMode(QProcess::MergedChannels);
     connect(process, &QProcess::readyReadStandardOutput, this, [this]() {
-        qDebug() << process->readAllStandardOutput();
+        appendOutput(process->readAllStandardOutput());
     });
-
     connect(process, &QProcess::readyReadStandardError, this, [this]() {
-        qDebug() << process->readAllStandardError();
+        appendOutput(process->readAllStandardError());
     });
-
     connect(process, &QProcess::finished, this, &PythonRunner::onFinished);
 }
 
-void PythonRunner::start() {
+PythonRunner::PythonRunner(QPlainTextEdit *outputWidget, QObject *parent)
+    : PythonRunner(parent)
+{
+    output = outputWidget;
+}
+
+void PythonRunner::start()
+{
     scripts = {
-        "/media/windows/workspace/My_Apps/Geometry/GUI/Visualization/get_data.py",
-        "/media/windows/workspace/My_Apps/Geometry/GUI/Visualization/main_animation.py",
-        "/media/windows/workspace/My_Apps/Geometry/GUI/Visualization/remove_data.py"
+        "C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization/getdata.py",
+        "C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization/main_animation.py",
+        "C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization/removedata.py"
     };
+
+    currentIndex = 0;
+    appendOutput("Starting Python script sequence...");
+    emit progressUpdate("Starting Python script sequence...");
     runNext();
 }
 
-void PythonRunner::runNext() {
+void PythonRunner::runNext()
+{
     if (currentIndex < scripts.size()) {
-        QString currentScript = scripts[currentIndex];
-        qDebug() << "Running script:" << currentScript;
-        process->start("python3", QStringList() << currentScript);
+        QString script = scripts[currentIndex];
+        QString msg = QString("> Running script %1 of %2: %3")
+                          .arg(currentIndex + 1)
+                          .arg(scripts.size())
+                          .arg(script);
+
+        appendOutput(msg);
+        emit progressUpdate(msg);
+        qDebug() << msg;
+
+        process->setWorkingDirectory("C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization");
+
+        if (script.contains("main_animation.py", Qt::CaseInsensitive)) {
+            process->start("python", QStringList()
+                           << "-m" << "manim"
+                           << "-qh"
+                           << script
+                           << "DijkstraVisualization");
+        } else {
+            process->start("python", QStringList() << script);
+        }
     } else {
-        qDebug() << "All scripts finished!";
+        QString doneMsg = "All scripts finished! Video ready.";
+        appendOutput(doneMsg);
+        emit progressUpdate(doneMsg);
+        emit allScriptsFinished();
+        qDebug() << doneMsg;
     }
 }
 
-void PythonRunner::onFinished(int exitCode, QProcess::ExitStatus status) {
+void PythonRunner::onFinished(int exitCode, QProcess::ExitStatus status)
+{
     Q_UNUSED(status)
-    qDebug() << "Script finished with code:" << exitCode;
+    QString msg = QString("Script %1 finished (exit code %2)")
+                      .arg(currentIndex + 1)
+                      .arg(exitCode);
+    appendOutput(msg);
+    emit progressUpdate(msg);
+
     currentIndex++;
     runNext();
 }
+
+void PythonRunner::appendOutput(const QString &text)
+{
+    if (text.trimmed().isEmpty()) return;
+
+    if (output) {
+        output->appendPlainText(text.trimmed());
+        output->moveCursor(QTextCursor::End);
+    }
+
+    if (labelOutput) {
+        labelOutput->setText(labelOutput->text() + "\n" + text.trimmed());
+    }
+}
+
+

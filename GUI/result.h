@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QMediaPlayer>
 #include <QVideoWidget>
+#include "pythonrunner.h"
 
 namespace Ui {
 class Result;
@@ -19,11 +20,13 @@ public:
     ~Result();
     QString returnShortestPathResult(QString shortestPathRes);
     QString shortestPathResult;
+    void startPythonRunner();
 
 private:
     Ui::Result *ui;
     QMediaPlayer *player;
     QVideoWidget *videoWidget;
+    PythonRunner *pythonRunner;
 };
 
 #endif // RESULT_H
