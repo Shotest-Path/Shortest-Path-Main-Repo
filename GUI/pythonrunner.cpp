@@ -50,7 +50,7 @@ void PythonRunner::runNext()
         emit progressUpdate(msg);
         qDebug() << msg;
 
-        process->setWorkingDirectory("../../../Visualization");
+        process->setWorkingDirectory(QFileInfo(script).absolutePath());
 
         if (script.contains("main_animation.py", Qt::CaseInsensitive)) {
             process->start("manim", QStringList()
