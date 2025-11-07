@@ -1,0 +1,10 @@
+debug/convexandconcave.o
+debug/main.o
+debug/mainwindow.o
+debug/pythonrunner.o
+debug/result.o
+debug/moc_convexandconcave.o
+debug/moc_mainwindow.o
+debug/moc_pythonrunner.o
+debug/moc_result.o
+debug/moc_shortestpath.o

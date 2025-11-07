@@ -307,8 +307,11 @@ Makefile: ../../Geometry_App.pro D:/Qt/6.9.3/mingw_64/mkspecs/win32-g++/qmake.co
 		D:/Qt/6.9.3/mingw_64/mkspecs/features/yacc.prf \
 		D:/Qt/6.9.3/mingw_64/mkspecs/features/lex.prf \
 		../../Geometry_App.pro \
+		D:/Qt/6.9.3/mingw_64/lib/Qt6MultimediaWidgets.prl \
+		D:/Qt/6.9.3/mingw_64/lib/Qt6Multimedia.prl \
 		D:/Qt/6.9.3/mingw_64/lib/Qt6Widgets.prl \
 		D:/Qt/6.9.3/mingw_64/lib/Qt6Gui.prl \
+		D:/Qt/6.9.3/mingw_64/lib/Qt6Network.prl \
 		D:/Qt/6.9.3/mingw_64/lib/Qt6Core.prl \
 		D:/Qt/6.9.3/mingw_64/lib/Qt6EntryPoint.prl \
 		D:/Qt/6.9.3/mingw_64/mkspecs/features/build_pass.prf
@@ -550,8 +553,11 @@ D:/Qt/6.9.3/mingw_64/mkspecs/features/exceptions.prf:
 D:/Qt/6.9.3/mingw_64/mkspecs/features/yacc.prf:
 D:/Qt/6.9.3/mingw_64/mkspecs/features/lex.prf:
 ../../Geometry_App.pro:
+D:/Qt/6.9.3/mingw_64/lib/Qt6MultimediaWidgets.prl:
+D:/Qt/6.9.3/mingw_64/lib/Qt6Multimedia.prl:
 D:/Qt/6.9.3/mingw_64/lib/Qt6Widgets.prl:
 D:/Qt/6.9.3/mingw_64/lib/Qt6Gui.prl:
+D:/Qt/6.9.3/mingw_64/lib/Qt6Network.prl:
 D:/Qt/6.9.3/mingw_64/lib/Qt6Core.prl:
 D:/Qt/6.9.3/mingw_64/lib/Qt6EntryPoint.prl:
 D:/Qt/6.9.3/mingw_64/mkspecs/features/build_pass.prf:

@@ -2,6 +2,9 @@
 #include "ui_convexandconcave.h"
 #include <QErrorMessage>
 #include <QMessageBox>
+#include "ConvexAndConCaveDrawAlgo.cpp"
+#include "shortestpath.h"
+#include "ShortestPathAlgo-Dijstra.cpp"
 
 ConvexAndConcave::ConvexAndConcave(QWidget *parent)
     : QDialog(parent)
@@ -46,24 +49,7 @@ void ConvexAndConcave::onAddPointClick()
 void ConvexAndConcave::onRunConvexAndConcaveClick()
 {
 
-    if(ui->concaveRadioButton->isChecked())
-    {
-       //call concave function
-        qDebug()<<"concave";
-       hide();
-       resultObject->show();
-    }
-    else if(ui->convexRadioButton->isChecked())
-    {
-        //call convex function
-        qDebug()<<"convex";
-        hide();
-        resultObject->show();
-    }
-    else
-    {
-        QMessageBox::critical(nullptr, "Error", "An unselectead polgon Type error occurred!");
-    }
+
     if(ui->startPointLineEdit->text()==""||ui->endPointLineEdit->text()=="")
     {
         QMessageBox::critical(nullptr, "Error", "you must add starting and end points");
@@ -72,6 +58,45 @@ void ConvexAndConcave::onRunConvexAndConcaveClick()
     {
         startPoint=ui->startPointLineEdit->text().toStdString()[0];
         endPoint=ui->endPointLineEdit->text().toStdString()[0];
+        if(ui->concaveRadioButton->isChecked())
+        {
+            Polygon theGivenGraph;
+            ShortestPath theFinalpath;
+            theGivenGraph.GetConcave(thePoitsOfHoleGraph);
+            theFinalpath.ShortestPathGraph=theGivenGraph.Edges;
+            dijkstra
+                (
+                    theFinalpath.ShortestPathGraph,
+                    startPoint,
+                    endPoint,
+                    theFinalpath.distances,
+                    theFinalpath.prev,
+                    theFinalpath.shortest_path
+                    );
+            hide();
+            resultObject->show();
+        }
+        else if(ui->convexRadioButton->isChecked())
+        {
+            Polygon theGivenGraph;
+            ShortestPath theFinalpath;
+            theFinalpath.ShortestPathGraph=theGivenGraph.GetConvex(thePoitsOfHoleGraph);
+            dijkstra
+                (
+                theFinalpath.ShortestPathGraph,
+                startPoint,
+                endPoint,
+                theFinalpath.distances,
+                theFinalpath.prev,
+                theFinalpath.shortest_path
+                );
+            hide();
+            resultObject->show();
+        }
+        else
+        {
+            QMessageBox::critical(nullptr, "Error", "An unselectead polgon Type error occurred!");
+        }
 
     }
 }
