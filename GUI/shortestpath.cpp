@@ -74,6 +74,11 @@ void ShortestPath::onRunClick()
     for(auto i : shortest_path){
        shortestPathText += i + ' ';
     }
+    double len = 0;
+    for(auto element : distances){
+        len += element.second;
+    }
+    shortestPathText+= (" => (" + to_string(len) + ")");
 
     exportResultFile(
         ShortestPathGraph,

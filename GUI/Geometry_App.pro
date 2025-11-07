@@ -22,6 +22,7 @@ SOURCES += \
 
 HEADERS += \
     convexandconcave.h \
+    generateTheCoordinates.h \
     mainwindow.h \
     pythonrunner.h \
     result.h \

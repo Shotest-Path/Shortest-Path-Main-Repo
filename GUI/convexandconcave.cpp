@@ -5,6 +5,8 @@
 #include "ConvexAndConCaveDrawAlgo.cpp"
 #include "shortestpath.h"
 #include "ShortestPathAlgo-Dijstra.cpp"
+#include "exportResultFile.cpp"
+#include <QTimer>
 
 ConvexAndConcave::ConvexAndConcave(QWidget *parent)
     : QDialog(parent)
@@ -73,7 +75,30 @@ void ConvexAndConcave::onRunConvexAndConcaveClick()
                     theFinalpath.prev,
                     theFinalpath.shortest_path
                     );
+            for(auto i : theFinalpath.shortest_path){
+                shortestPathText += i + ' ';
+            }
+            double len = 0;
+            for(auto element :theFinalpath.distances){
+                len += element.second;
+            }
+            shortestPathText+= (" => (" + to_string(len) + ")");
+
+            exportResultFile(
+                theFinalpath.ShortestPathGraph,
+                theFinalpath.distances,
+                theFinalpath.prev,
+                theFinalpath.shortest_path,
+                false,
+                thePoitsOfHoleGraph
+                );
+
+            QString shortestPathTextGlobal =  QString::fromStdString(shortestPathText);
+
+            resultObject->returnShortestPathResult(shortestPathTextGlobal);
+            resultObject->startPythonRunner();
             hide();
+            resultObject->returnShortestPathResult(shortestPathTextGlobal);
             resultObject->show();
         }
         else if(ui->convexRadioButton->isChecked())
@@ -90,14 +115,35 @@ void ConvexAndConcave::onRunConvexAndConcaveClick()
                 theFinalpath.prev,
                 theFinalpath.shortest_path
                 );
+            for(auto i : theFinalpath.shortest_path){
+                shortestPathText += i + ' ';
+            }
+            double len = 0;
+            for(auto element :theFinalpath.distances){
+                len += element.second;
+            }
+            shortestPathText+= (" => (" + to_string(len) + ")");
+
+            exportResultFile(
+                theFinalpath.ShortestPathGraph,
+                theFinalpath.distances,
+                theFinalpath.prev,
+                theFinalpath.shortest_path,
+                false,
+                thePoitsOfHoleGraph
+                );
+            QString shortestPathTextGlobal =  QString::fromStdString(shortestPathText);
+
+            resultObject->returnShortestPathResult(shortestPathTextGlobal);
+            resultObject->startPythonRunner();
             hide();
+            resultObject->returnShortestPathResult(shortestPathTextGlobal);
             resultObject->show();
         }
         else
         {
             QMessageBox::critical(nullptr, "Error", "An unselectead polgon Type error occurred!");
         }
-
     }
 }
 ConvexAndConcave::~ConvexAndConcave()

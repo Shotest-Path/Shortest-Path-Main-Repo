@@ -5,14 +5,17 @@
 #include <QTextStream>
 #include <QCoreApplication>
 #include <QDebug>
-#include "generateTheCoordinates.cpp"
+#include "generateTheCoordinates.h"
 
 using namespace std;
 
-void exportResultFile(const map<char, map<char, double>>& ShortestPathGraph,
+inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGraph,
                       const map<char, double>& distances,
                       const map<char, char>& prev,
-                      const vector<char>& shortest_path)
+                      const vector<char>& shortest_path,
+                             bool isShortest = true,
+                        map<char ,pair<double,double>> thePoitsOfHoleGraph =  {}
+                             )
 {
     QString appdir = QDir(QCoreApplication::applicationDirPath())
     .absoluteFilePath("../../../Visualization");
@@ -72,11 +75,20 @@ void exportResultFile(const map<char, map<char, double>>& ShortestPathGraph,
     for (const auto& element : shortest_path) {
         outputFile << "\"" << QString(1, element) << "\",";
     }
+    GraphGeometry G;
+
     outputFile << "]\n";
-    map<char, array<double, 3>> points = generateNodePositions(ShortestPathGraph);
     outputFile << "        positions = {";
-    for (auto element : points){
-        outputFile << "\"" << element.first << "\": [" << element.second[0] << "," << element.second[1] << "," << 0 << "],";
+    if(isShortest){
+        map<char, array<double, 3>> points = G.generateNodePositions(ShortestPathGraph);
+        //generateNodePositions(ShortestPathGraph);
+        for (auto element : points){
+            outputFile << "\"" << element.first << "\": [" << element.second[0] << "," << element.second[1] << "," << 0 << "],";
+        }
+    }else{
+        for (auto element : thePoitsOfHoleGraph){
+            outputFile << "\"" << element.first << "\": [" << element.second.first << "," << element.second.second << "," << 0 << "],";
+        }
     }
     outputFile << "}";
     file.close();
