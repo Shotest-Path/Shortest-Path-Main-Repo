@@ -34,7 +34,7 @@ private:
     Ui::ShortestPath *ui;
     Result *resultObject;
     QTimer *time;
-    PythonRunner pythonRunRunRun;
+    PythonRunner *pythonRunRunRun;
 };
 
 #endif // SHORTESTPATH_H

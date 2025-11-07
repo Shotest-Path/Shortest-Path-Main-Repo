@@ -23,26 +23,26 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>150</y>
+     <y>50</y>
      <width>1051</width>
      <height>691</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_4">
-    <item row="1" column="0">
-     <widget class="QPushButton" name="pauseButton">
+    <item row="1" column="1">
+     <widget class="QPushButton" name="playButton">
       <property name="text">
-       <string>Pause</string>
+       <string>Play</string>
       </property>
      </widget>
     </item>
     <item row="0" column="0" colspan="2">
      <layout class="QVBoxLayout" name="verticalLayout"/>
     </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="playButton">
+    <item row="1" column="0">
+     <widget class="QPushButton" name="pauseButton">
       <property name="text">
-       <string>Play</string>
+       <string>Pause</string>
       </property>
      </widget>
     </item>
@@ -53,40 +53,96 @@
       </property>
      </widget>
     </item>
+    <item row="4" column="0" colspan="2">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Policy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>10</width>
+        <height>30</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
    </layout>
   </widget>
-  <widget class="QLabel" name="shortestPathResultLabel">
+  <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>80</y>
-     <width>113</width>
-     <height>24</height>
+     <x>30</x>
+     <y>740</y>
+     <width>1051</width>
+     <height>151</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Shortest Path</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>386</x>
-     <y>80</y>
-     <width>137</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_4">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_5"/>
-    </item>
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Shortest Path: </string>
+     <widget class="QPlainTextEdit" name="pythonOutputConsole">
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>10</y>
+     <width>601</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Shortest Path: </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="shortestPathResultLabel">
+        <property name="text">
+         <string>Shortest Path</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

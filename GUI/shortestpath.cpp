@@ -6,13 +6,12 @@
 #include <QTimer>
 #include "exportResultFile.cpp"
 #include <QMessageBox>
-#include "pythonrunner.h"
+
 using namespace std;
 ShortestPath::ShortestPath(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::ShortestPath)
-    ,resultObject(new Result())
-    ,pythonRunRunRun(PythonRunner())
+    , resultObject(new Result())
 {
     ui->setupUi(this);
     connect(ui->addNodeButton,&QPushButton::clicked,this,&ShortestPath::onAddNodeClick);
@@ -87,7 +86,12 @@ void ShortestPath::onRunClick()
 
     time = new QTimer(this);
     time->start();
-    pythonRunRunRun.start();
+
+    hide();
+    resultObject->returnShortestPathResult(shortestPathTextGlobal);
+    resultObject->show();
+    resultObject->startPythonRunner();
+
     time->stop();
     hide();
     resultObject->returnShortestPathResult(shortestPathTextGlobal);
