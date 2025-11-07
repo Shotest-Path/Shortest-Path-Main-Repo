@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../pythonrunner.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -39,8 +40,11 @@ template <> constexpr inline auto PythonRunner::qt_create_metaobjectdata<qt_meta
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "PythonRunner",
-        "runNext",
+        "progressUpdate",
         "",
+        "message",
+        "allScriptsFinished",
+        "runNext",
         "onFinished",
         "exitCode",
         "QProcess::ExitStatus",
@@ -48,11 +52,17 @@ template <> constexpr inline auto PythonRunner::qt_create_metaobjectdata<qt_meta
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'progressUpdate'
+        QtMocHelpers::SignalData<void(const QString &)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 3 },
+        }}),
+        // Signal 'allScriptsFinished'
+        QtMocHelpers::SignalData<void()>(4, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'runNext'
-        QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'onFinished'
-        QtMocHelpers::SlotData<void(int, QProcess::ExitStatus)>(3, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::Int, 4 }, { 0x80000000 | 5, 6 },
+        QtMocHelpers::SlotData<void(int, QProcess::ExitStatus)>(6, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 7 }, { 0x80000000 | 8, 9 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -77,10 +87,18 @@ void PythonRunner::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     auto *_t = static_cast<PythonRunner *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->runNext(); break;
-        case 1: _t->onFinished((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<QProcess::ExitStatus>>(_a[2]))); break;
+        case 0: _t->progressUpdate((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 1: _t->allScriptsFinished(); break;
+        case 2: _t->runNext(); break;
+        case 3: _t->onFinished((*reinterpret_cast<std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<QProcess::ExitStatus>>(_a[2]))); break;
         default: ;
         }
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (PythonRunner::*)(const QString & )>(_a, &PythonRunner::progressUpdate, 0))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (PythonRunner::*)()>(_a, &PythonRunner::allScriptsFinished, 1))
+            return;
     }
 }
 
@@ -103,15 +121,27 @@ int PythonRunner::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 4;
     }
     return _id;
+}
+
+// SIGNAL 0
+void PythonRunner::progressUpdate(const QString & _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 0, nullptr, _t1);
+}
+
+// SIGNAL 1
+void PythonRunner::allScriptsFinished()
+{
+    QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 QT_WARNING_POP

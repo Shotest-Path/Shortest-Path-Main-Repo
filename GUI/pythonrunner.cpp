@@ -1,5 +1,6 @@
 #include "pythonrunner.h"
 #include <QDebug>
+#include <QDir>
 
 PythonRunner::PythonRunner(QObject *parent)
     : QObject(parent), process(new QProcess(this)), currentIndex(0),
@@ -23,10 +24,11 @@ PythonRunner::PythonRunner(QPlainTextEdit *outputWidget, QObject *parent)
 
 void PythonRunner::start()
 {
+    QString basePath = QDir::cleanPath(QDir::currentPath() + "../../../../Visualization");
     scripts = {
-        "C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization/getdata.py",
-        "C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization/main_animation.py",
-        "C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization/removedata.py"
+        basePath + "/getdata.py",
+        basePath + "/main_animation.py",
+        basePath + "/removedata.py"
     };
 
     currentIndex = 0;
@@ -48,16 +50,16 @@ void PythonRunner::runNext()
         emit progressUpdate(msg);
         qDebug() << msg;
 
-        process->setWorkingDirectory("C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization");
+        process->setWorkingDirectory("../../../Visualization");
 
         if (script.contains("main_animation.py", Qt::CaseInsensitive)) {
-            process->start("python", QStringList()
+            process->start("python3", QStringList()
                            << "-m" << "manim"
                            << "-qh"
                            << script
                            << "DijkstraVisualization");
         } else {
-            process->start("python", QStringList() << script);
+            process->start("python3", QStringList() << script);
         }
     } else {
         QString doneMsg = "All scripts finished! Video ready.";

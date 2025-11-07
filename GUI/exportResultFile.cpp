@@ -5,6 +5,7 @@
 #include <QTextStream>
 #include <QCoreApplication>
 #include <QDebug>
+#include "generateTheCoordinates.cpp"
 
 using namespace std;
 
@@ -13,21 +14,15 @@ void exportResultFile(const map<char, map<char, double>>& ShortestPathGraph,
                       const map<char, char>& prev,
                       const vector<char>& shortest_path)
 {
-    QString appDir = QCoreApplication::applicationDirPath();
+    QString appdir = QDir(QCoreApplication::applicationDirPath())
+    .absoluteFilePath("../../../Visualization");
 
-    QDir dir(appDir);
+    QDir dir(appdir);
 
-    dir.cdUp();
-    dir.cdUp();
-     dir.cdUp();
-    if (!dir.cd("Visualization")) {
-        QString visualizationPath = dir.filePath("Visualization");
-        qDebug() << "Visualization folder not found. Creating:" << visualizationPath;
-        if (!QDir().mkpath(visualizationPath)) {
-            qDebug() << "Failed to create Visualization directory at" << visualizationPath;
-            return;
-        }
-        if (!dir.cd("Visualization")) {
+    if (!dir.exists()) {
+        qDebug() << "Visualization folder not found. Creating:" << appdir;
+        if (!QDir().mkpath(appdir)) {
+            qDebug() << "Failed to create Visualization directory at" << appdir;
             return;
         }
     }
@@ -40,7 +35,6 @@ void exportResultFile(const map<char, map<char, double>>& ShortestPathGraph,
     }
 
     QTextStream outputFile(&file);
-
     outputFile << "        nodes = [";
     for (const auto& element : ShortestPathGraph) {
         // element.first is char; convert to QString safely
@@ -79,11 +73,11 @@ void exportResultFile(const map<char, map<char, double>>& ShortestPathGraph,
         outputFile << "\"" << QString(1, element) << "\",";
     }
     outputFile << "]\n";
-    // positions = {
-    //     "A": [-3, 1, 0],
-    //     "B": [-1, 2, 0],
-    //     "C": [1, 1, 0],
-    // }
-    outputFile << "        positions = {\"A\": [0, 0, 0],\"B\": [3, 0, 0],\"C\": [3, 4, 0]}";
+    map<char, array<double, 3>> points = generateNodePositions(ShortestPathGraph);
+    outputFile << "        positions = {";
+    for (auto element : points){
+        outputFile << "\"" << element.first << "\": [" << element.second[0] << "," << element.second[1] << "," << 0 << "],";
+    }
+    outputFile << "}";
     file.close();
 }

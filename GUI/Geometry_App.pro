@@ -13,6 +13,7 @@ SOURCES += \
     ShortestPathAlgo-Dijstra.cpp \
     convexandconcave.cpp \
     exportResultFile.cpp \
+    generateTheCoordinates.cpp \
     main.cpp \
     mainwindow.cpp \
     pythonrunner.cpp \

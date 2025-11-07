@@ -4,6 +4,8 @@
 #include <QDialog>
 #include <map>
 #include "result.h"
+#include <QTimer>
+#include "pythonrunner.h"
 
 using namespace std;
 namespace Ui {
@@ -19,12 +21,16 @@ public:
     ~ConvexAndConcave();
     map<char ,pair<double,double>> thePoitsOfHoleGraph;
     char startPoint,endPoint;
+    string shortestPathText;
+
 private slots:
     void onAddPointClick();
     void onRunConvexAndConcaveClick();
 private:
     Ui::ConvexAndConcave *ui;
     Result *resultObject;
+    QTimer *time;
+    PythonRunner *pythonRunRunRun;
 };
 
 #endif // CONVEXANDCONCAVE_H

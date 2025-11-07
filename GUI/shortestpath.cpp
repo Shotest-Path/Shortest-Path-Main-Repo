@@ -87,9 +87,9 @@ void ShortestPath::onRunClick()
     time = new QTimer(this);
     time->start();
 
-    hide();
+    // hide();
     resultObject->returnShortestPathResult(shortestPathTextGlobal);
-    resultObject->show();
+    // resultObject->show();
     resultObject->startPythonRunner();
 
     time->stop();
