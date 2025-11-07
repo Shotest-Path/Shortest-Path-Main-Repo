@@ -11,16 +11,23 @@ Result::Result(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->pythonOutputConsole->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->pythonOutputConsole->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
     QString shortestPathTextGlobal = Result::shortestPathResult;
     ui->shortestPathResultLabel->setText(shortestPathTextGlobal);
     player = new QMediaPlayer(this);
     videoWidget = new QVideoWidget(this);
 
+    pythonRunner = new PythonRunner(ui->pythonOutputConsole, this);
+    connect(pythonRunner, &PythonRunner::allScriptsFinished, this, []() {
+        qDebug() << "Python scripts completed successfully!";
+    });
+
     ui->verticalLayout->addWidget(videoWidget);
     player->setVideoOutput(videoWidget);
-    // TODO : change this path
-    QString path = "../../../Visualization/media/videos/P1/1080p60/DijkstraVisualization.mp4";
-    // QString file = QFileDialog::getOpenFileName(this, "Open Video");
+
+    QString path = "../../../Visualization/media/videos/main_animation/1080p60/DijkstraVisualization.mp4";
 
     if (!path.isEmpty()) {
         player->setSource(QUrl::fromLocalFile(path));
@@ -42,3 +49,10 @@ QString Result::returnShortestPathResult(QString shortestPathRes){
     ui->shortestPathResultLabel->setText(shortestPathRes);
     return shortestPathRes;
 }
+
+void Result::startPythonRunner() {
+    if (pythonRunner) {
+        pythonRunner->start();
+    }
+}
+
