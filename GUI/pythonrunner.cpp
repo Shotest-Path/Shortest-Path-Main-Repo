@@ -54,12 +54,11 @@ void PythonRunner::runNext()
 
         if (script.contains("main_animation.py", Qt::CaseInsensitive)) {
             process->start("manim", QStringList()
-                           // << "-p"
-                           << "-qm"
-                           << "main_animation.py"
-                           << "DijkstraVisualization");// manim -p -qh main_animation.py DijkstraVisualization
+                        << "-qm"
+                        << "main_animation.py"
+                        << "DijkstraVisualization");
         } else {
-            process->start("python3", QStringList() << script);
+            process->start("python", QStringList() << script);
         }
     } else {
         QString doneMsg = "All scripts finished! Video ready.";

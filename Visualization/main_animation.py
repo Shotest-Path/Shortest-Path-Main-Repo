@@ -4,18 +4,9 @@ import numpy as np
 config.media_dir = "./media"
 config.video_dir = "./media/videos"
 config.images_dir = "./media/images"
-config.verbosity = "WARNING"
-
 config.format = "mp4"
-config.pixel_height = 1080
-config.pixel_width = 1920
-config.frame_rate = 30
 config.renderer = "cairo"
-
-config.movie_file_extension = ".mp4"
-config.ffmpeg_quality = "20"
-config.write_to_movie = True
-config.use_opengl_renderer = False
+config.ffmpeg_quality = "24"
 
 class DijkstraVisualization(Scene):
     def construct(self):
