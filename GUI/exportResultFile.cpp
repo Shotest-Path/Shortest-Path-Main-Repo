@@ -18,7 +18,7 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
                              )
 {
     QString appdir = QDir(QCoreApplication::applicationDirPath())
-    .absoluteFilePath("../../../Visualization");
+    .absoluteFilePath("../../../../Visualization");
 
     QDir dir(appdir);
 
