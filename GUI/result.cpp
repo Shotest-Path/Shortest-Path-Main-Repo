@@ -16,28 +16,31 @@ Result::Result(QWidget *parent)
 
     QString shortestPathTextGlobal = Result::shortestPathResult;
     ui->shortestPathResultLabel->setText(shortestPathTextGlobal);
+    pythonRunner = new PythonRunner(ui->pythonOutputConsole, this);
+    connect(pythonRunner, &PythonRunner::allScriptsFinished, this, &Result::onVideoReady);
+
     player = new QMediaPlayer(this);
     videoWidget = new QVideoWidget(this);
-
-    pythonRunner = new PythonRunner(ui->pythonOutputConsole, this);
-    connect(pythonRunner, &PythonRunner::allScriptsFinished, this, []() {
-        qDebug() << "Python scripts completed successfully!";
-    });
-
     ui->verticalLayout->addWidget(videoWidget);
     player->setVideoOutput(videoWidget);
 
-    QString path = "../../../Visualization/media/videos/output_qt.mp4";
-
-    if (!path.isEmpty()) {
-        player->setSource(QUrl::fromLocalFile(path));
-        player->play();
-    }
-
     connect(ui->playButton, &QPushButton::clicked, player, &QMediaPlayer::play);
     connect(ui->pauseButton, &QPushButton::clicked, player, &QMediaPlayer::pause);
-    connect(ui->stopButton , &QPushButton::clicked, player, &QMediaPlayer::stop);
-}
+    connect(ui->stopButton, &QPushButton::clicked, player, &QMediaPlayer::stop);
+}    void Result::onVideoReady()
+    {
+        QString videoPath = QDir::cleanPath(QCoreApplication::applicationDirPath() +
+                                            "/../../../../Visualization/media/videos/main_animation/1080p60/DynamicGraphScene.mp4");
+    
+        if (!QFile::exists(videoPath)) {
+            qDebug() << "Video not found at:" << videoPath;
+            return;
+        }
+    
+        player->setSource(QUrl::fromLocalFile(videoPath));
+        player->play();
+    }
+    
 
 Result::~Result()
 {

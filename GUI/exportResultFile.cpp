@@ -38,14 +38,14 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
     }
 
     QTextStream outputFile(&file);
-    outputFile << "        nodes = [";
+    outputFile << "nodes = [";
     for (const auto& element : ShortestPathGraph) {
         // element.first is char; convert to QString safely
         outputFile << "\"" << QString(1, element.first) << "\",";
     }
     outputFile << "]\n";
 
-    outputFile << "        edges = [\n";
+    outputFile << "edges = [\n";
     for (const auto& element : ShortestPathGraph) {
         for (const auto& i : element.second) {
             outputFile << "        (\"" << QString(1, element.first) << "\",\""
@@ -54,13 +54,13 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
     }
     outputFile << "        ]\n";
 
-    outputFile << "        distances = {";
+    outputFile << "distances = {";
     for (const auto& dist : distances) {
         outputFile << "\"" << QString(1, dist.first) << "\":" << dist.second << ",";
     }
     outputFile << "}\n";
 
-    outputFile << "        previous = {";
+    outputFile << "previous = {";
     for (const auto& element : prev) {
         outputFile << "\"" << QString(1, element.first) << "\":";
         if (element.second == 0) {
@@ -71,25 +71,29 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
     }
     outputFile << "}\n";
 
-    outputFile << "        shortest_path = [";
+    outputFile << "shortest_path = [";
     for (const auto& element : shortest_path) {
         outputFile << "\"" << QString(1, element) << "\",";
     }
     GraphGeometry G;
 
     outputFile << "]\n";
-    outputFile << "        positions = {";
-    if(isShortest){
+    outputFile << "coordinates = {";
+    if (isShortest) {
         map<char, array<double, 3>> points = G.generateNodePositions(ShortestPathGraph);
-        //generateNodePositions(ShortestPathGraph);
-        for (auto element : points){
-            outputFile << "\"" << element.first << "\": [" << element.second[0] << "," << element.second[1] << "," << 0 << "],";
+        for (const auto& element : points) {
+            outputFile << "\"" << element.first << "\": np.array(["
+                       << element.second[0] << ", "
+                       << element.second[1] << ", "
+                       << element.second[2] << "]),";
         }
-    }else{
-        for (auto element : thePoitsOfHoleGraph){
-            outputFile << "\"" << element.first << "\": [" << element.second.first << "," << element.second.second << "," << 0 << "],";
+    } else {
+        for (const auto& element : thePoitsOfHoleGraph) {
+            outputFile << "\"" << element.first << "\": np.array(["
+                       << element.second.first << ", "
+                       << element.second.second << ", 0]),";
         }
     }
-    outputFile << "}";
+    outputFile << "}\n";
     file.close();
 }

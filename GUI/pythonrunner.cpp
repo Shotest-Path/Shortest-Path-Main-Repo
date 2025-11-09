@@ -54,9 +54,9 @@ void PythonRunner::runNext()
 
         if (script.contains("main_animation.py", Qt::CaseInsensitive)) {
             process->start("manim", QStringList()
-                        << "-qm"
+                        << "-qh"
                         << "main_animation.py"
-                        << "DijkstraVisualization");
+                        << "DynamicGraphScene");
         } else {
             process->start("python", QStringList() << script);
         }

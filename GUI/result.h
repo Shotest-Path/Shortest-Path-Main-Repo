@@ -22,6 +22,9 @@ public:
     QString shortestPathResult;
     void startPythonRunner();
 
+private slots:
+    void onVideoReady();
+
 private:
     Ui::Result *ui;
     QMediaPlayer *player;
