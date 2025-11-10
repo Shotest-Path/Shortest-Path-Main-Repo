@@ -7,13 +7,14 @@
 #include <QLabel>
 #include <QStringList>
 
+
+ inline bool isConvexAndConcave =false;
 class PythonRunner : public QObject {
     Q_OBJECT
 
 public:
     explicit PythonRunner(QObject *parent = nullptr);
     explicit PythonRunner(QPlainTextEdit *outputWidget, QObject *parent = nullptr);
-
     void start();
 
 signals:

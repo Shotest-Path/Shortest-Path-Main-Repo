@@ -51,6 +51,7 @@ void ConvexAndConcave::onAddPointClick()
 void ConvexAndConcave::onRunConvexAndConcaveClick()
 {
 
+    isConvexAndConcave=true;
 
     if(ui->startPointLineEdit->text()==""||ui->endPointLineEdit->text()=="")
     {
@@ -80,6 +81,7 @@ void ConvexAndConcave::onRunConvexAndConcaveClick()
             }
             double len = 0;
             for(auto element :theFinalpath.distances){
+                if(element.first==theFinalpath.endNode)
                 len += element.second;
             }
             shortestPathText+= (" => (" + to_string(len) + ")");
@@ -100,6 +102,7 @@ void ConvexAndConcave::onRunConvexAndConcaveClick()
             hide();
             resultObject->returnShortestPathResult(shortestPathTextGlobal);
             resultObject->show();
+
         }
         else if(ui->convexRadioButton->isChecked())
         {
@@ -120,7 +123,8 @@ void ConvexAndConcave::onRunConvexAndConcaveClick()
             }
             double len = 0;
             for(auto element :theFinalpath.distances){
-                len += element.second;
+                if(element.first==theFinalpath.endNode)
+                    len += element.second;
             }
             shortestPathText+= (" => (" + to_string(len) + ")");
 
@@ -144,6 +148,7 @@ void ConvexAndConcave::onRunConvexAndConcaveClick()
         {
             QMessageBox::critical(nullptr, "Error", "An unselectead polgon Type error occurred!");
         }
+
     }
 }
 ConvexAndConcave::~ConvexAndConcave()

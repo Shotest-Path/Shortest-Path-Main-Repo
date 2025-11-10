@@ -4,6 +4,8 @@
 #include <QMediaPlayer>
 #include <QVideoWidget>
 #include <QFileDialog>
+#include "pythonrunner.h"
+
 
 Result::Result(QWidget *parent)
     : QDialog(parent)
@@ -29,8 +31,9 @@ Result::Result(QWidget *parent)
     connect(ui->stopButton, &QPushButton::clicked, player, &QMediaPlayer::stop);
 }    void Result::onVideoReady()
     {
-        QString videoPath = QDir::cleanPath(QCoreApplication::applicationDirPath() +
-                                            "/../../../../Visualization/media/videos/main_animation/1080p60/DynamicGraphScene.mp4");
+    if(isConvexAndConcave==false)
+        {
+        QString videoPath ="C:/Users/boody/Desktop/git_learn/Shortest-Path-Main-Repo/Visualization/media/videos/main_animation/1080p60/DynamicGraphScene.mp4";
     
         if (!QFile::exists(videoPath)) {
             qDebug() << "Video not found at:" << videoPath;
@@ -40,7 +43,19 @@ Result::Result(QWidget *parent)
         player->setSource(QUrl::fromLocalFile(videoPath));
         player->play();
     }
-    
+    else if(isConvexAndConcave==true)
+    {
+        QString videoPath ="C:/Users/boody/Desktop/git_learn/Shortest-Path-Main-Repo/Visualization/media/videos/main_animation_convexandconcave/1080p60/DynamicGraphScene.mp4";
+
+        if (!QFile::exists(videoPath)) {
+            qDebug() << "Video not found at:" << videoPath;
+            return;
+        }
+
+        player->setSource(QUrl::fromLocalFile(videoPath));
+        player->play();
+    }
+    }
 
 Result::~Result()
 {

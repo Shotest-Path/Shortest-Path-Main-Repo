@@ -160,7 +160,7 @@ public:
         pair<double, double> B = Vertices[b];
 
         auto V = GetConcaveHull();
-        for (int i = 0; i < V.size(); i++)
+        for (size_t i = 0; i < V.size(); i++)
         {
             char c = V[i].first;
             char d = V[i].second;
@@ -219,7 +219,7 @@ public:
 
     int getIndexByChar(const vector<pair<char, pair<double, double>>>& V, char target)
     {
-        for (int i = 0; i < V.size(); i++)
+        for (size_t i = 0; i < V.size(); i++)
         {
             if (V[i].first == target)
                 return i;
@@ -271,7 +271,7 @@ public:
         sort(S.begin(), S.end(), [](auto& a, auto& b) {
             return a.second < b.second;
         });
-        for (int j = 0; j < S.size() - 2; j++)
+        for (size_t j = 0; j < S.size() - 2; j++)
         {
             int i1 = getIndexByChar(V, S[j].first);
             int i2 = getIndexByChar(V, S[j + 1].first);
@@ -332,7 +332,7 @@ public:
 
         E.push_back({pivot.first,S[0].first});
 
-        for (int j = 0; j < S.size() - 1; j++)
+        for (size_t j = 0; j < S.size() - 1; j++)
         {
             E.push_back({S[j].first,S[j+1].first});
         }
@@ -343,6 +343,7 @@ public:
 
     void GetConcave(map<char ,pair<double,double>> thePoints)
     {
+        Vertices=thePoints;
         vector<pair<char, pair<double, double>>> V;
 
         for (auto& p : thePoints)
@@ -364,7 +365,7 @@ public:
                 }
             }
         }
-        for(int i=0 ; i<n ; i++)
+        for(size_t i=0 ; i<E.size() ; i++)
         {
             Edges[E[i].first].erase(E[i].second);
             Edges[E[i].second].erase(E[i].first);

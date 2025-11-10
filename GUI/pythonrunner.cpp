@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QDir>
 
+
 PythonRunner::PythonRunner(QObject *parent)
     : QObject(parent), process(new QProcess(this)), currentIndex(0),
     output(nullptr), labelOutput(nullptr)
@@ -24,7 +25,9 @@ PythonRunner::PythonRunner(QPlainTextEdit *outputWidget, QObject *parent)
 
 void PythonRunner::start()
 {
-    QString basePath = QDir::cleanPath(QDir::currentPath() + "../../../../Visualization");
+    if(isConvexAndConcave==false)
+    {
+    QString basePath = "C:/Users/boody/Desktop/git_learn/Shortest-Path-Main-Repo/Visualization";
     scripts = {
         basePath + "/getdata.py",
         basePath + "/main_animation.py",
@@ -35,6 +38,21 @@ void PythonRunner::start()
     appendOutput("Starting Python script sequence...");
     emit progressUpdate("Starting Python script sequence...");
     runNext();
+    }
+    else if(isConvexAndConcave==true)
+    {
+        QString basePath = "C:/Users/boody/Desktop/git_learn/Shortest-Path-Main-Repo/Visualization";
+        scripts = {
+            basePath + "/getdata.py",
+            basePath + "/main_animation_convexandconcave.py",
+            basePath + "/removedata.py"
+        };
+
+        currentIndex = 0;
+        appendOutput("Starting Python script sequence...");
+        emit progressUpdate("Starting Python script sequence...");
+        runNext();
+    }
 }
 
 void PythonRunner::runNext()

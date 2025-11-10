@@ -6,6 +6,7 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include "generateTheCoordinates.h"
+#include "pythonrunner.h"
 
 using namespace std;
 
@@ -17,8 +18,7 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
                         map<char ,pair<double,double>> thePoitsOfHoleGraph =  {}
                              )
 {
-    QString appdir = QDir(QCoreApplication::applicationDirPath())
-    .absoluteFilePath("../../../../Visualization");
+    QString appdir = "C:/Users/boody/Desktop/git_learn/Shortest-Path-Main-Repo/Visualization";
 
     QDir dir(appdir);
 
@@ -36,7 +36,8 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate)) {
         return;
     }
-
+    if(isConvexAndConcave==false)
+    {
     QTextStream outputFile(&file);
     outputFile << "nodes = [";
     for (const auto& element : ShortestPathGraph) {
@@ -78,4 +79,56 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
     outputFile << "]\n";
 
     file.close();
+}
+    if(isConvexAndConcave==true)
+    {
+        QTextStream outputFile(&file);
+        outputFile << "nodes = [";
+        for (const auto& element : ShortestPathGraph) {
+            // element.first is char; convert to QString safely
+            outputFile << "\"" << QString(1, element.first) << "\",";
+        }
+        outputFile << "]\n";
+
+        outputFile << "positions  = {\n";
+        for (const auto& element : thePoitsOfHoleGraph) {
+                outputFile << "        \"" << QString(1, element.first) << "\": ["
+                       <<element.second.first << ", " << element.second.second << ", 0],\n";
+        }
+        outputFile << "        }\n";
+
+        outputFile << "edges = [\n";
+        for (const auto& element : ShortestPathGraph) {
+            for (const auto& i : element.second) {
+                outputFile << "        (\"" << QString(1, element.first) << "\",\""
+                           << QString(1, i.first) << "\"," << i.second << "),\n";
+            }
+        }
+        outputFile << "        ]\n";
+
+        outputFile << "distances = {";
+        for (const auto& dist : distances) {
+            outputFile << "\"" << QString(1, dist.first) << "\":" << dist.second << ",";
+        }
+        outputFile << "}\n";
+
+        outputFile << "previous = {";
+        for (const auto& element : prev) {
+            outputFile << "\"" << QString(1, element.first) << "\":";
+            if (element.second == 0) {
+                outputFile << "None,";
+            } else {
+                outputFile << "\"" << QString(1, element.second) << "\",";
+            }
+        }
+        outputFile << "}\n";
+
+        outputFile << "shortest_path = [";
+        for (const auto& element : shortest_path) {
+            outputFile << "\"" << QString(1, element) << "\",";
+        }
+        outputFile << "]\n";
+
+        file.close();
+    }
 }

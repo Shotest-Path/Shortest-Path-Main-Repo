@@ -6,6 +6,7 @@
 #include <QTimer>
 #include "exportResultFile.cpp"
 #include <QMessageBox>
+#include "pythonrunner.h"
 
 using namespace std;
 ShortestPath::ShortestPath(QWidget *parent)
@@ -53,6 +54,8 @@ void ShortestPath::onAddNodeClick()
 }
 void ShortestPath::onRunClick()
 {
+    isConvexAndConcave=false;
+
     if(ui->startNodeLineEdit->text()==""||ui->endNodeLineEdit->text()=="")
     {
         QMessageBox::critical(nullptr, "Error", "you must add starting and end nodes");
@@ -76,7 +79,8 @@ void ShortestPath::onRunClick()
     }
     double len = 0;
     for(auto element : distances){
-        len += element.second;
+        if(element.first==endNode)
+            len = element.second;
     }
     shortestPathText+= (" => (" + to_string(len) + ")");
 
