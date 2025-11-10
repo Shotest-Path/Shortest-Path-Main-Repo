@@ -2,6 +2,29 @@ from manim import *
 import numpy as np
 
 # Data_S
+nodes = ["A","B","C","D",]
+edges = [
+        ("A","B",5.65685),
+        ("A","C",3.16228),
+        ("A","D",4),
+        ("B","A",5.65685),
+        ("B","C",3.16228),
+        ("C","A",3.16228),
+        ("C","B",3.16228),
+        ("C","D",1.41421),
+        ("D","A",4),
+        ("D","C",1.41421),
+        ]
+distances = {"A":0,"B":5.65685,"C":3.16228,"D":4,}
+previous = {"A":None,"B":"A","C":"A","D":"A",}
+shortest_path = ["A","B",]
+predefined_coordinates={
+        "A":np.array([0, 0, 0]),
+        "B":np.array([4, 4, 0]),
+        "C":np.array([3, 1, 0]),
+        "D":np.array([4, 0, 0]),
+        }
+
 # Data_E
 
 num_nodes = len(nodes)

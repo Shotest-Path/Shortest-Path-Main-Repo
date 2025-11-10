@@ -80,7 +80,7 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
 
     file.close();
 }
-    if(isConvexAndConcave==true)
+    else if(isConvexAndConcave==true)
     {
         QTextStream outputFile(&file);
         outputFile << "nodes = [";
@@ -89,13 +89,6 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
             outputFile << "\"" << QString(1, element.first) << "\",";
         }
         outputFile << "]\n";
-
-        outputFile << "positions  = {\n";
-        for (const auto& element : thePoitsOfHoleGraph) {
-                outputFile << "        \"" << QString(1, element.first) << "\": ["
-                       <<element.second.first << ", " << element.second.second << ", 0],\n";
-        }
-        outputFile << "        }\n";
 
         outputFile << "edges = [\n";
         for (const auto& element : ShortestPathGraph) {
@@ -128,6 +121,13 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
             outputFile << "\"" << QString(1, element) << "\",";
         }
         outputFile << "]\n";
+
+        outputFile << "predefined_coordinates={\n";
+        for (const auto& element : thePoitsOfHoleGraph) {
+            outputFile << "        \"" << QString(1, element.first) << "\":np.array(["
+                       <<element.second.first << ", " << element.second.second << ", 0]),\n";
+        }
+        outputFile << "        }\n";
 
         file.close();
     }

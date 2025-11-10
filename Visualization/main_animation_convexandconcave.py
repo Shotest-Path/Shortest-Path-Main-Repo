@@ -2,31 +2,6 @@ from manim import *
 import numpy as np
 
 # Data_S
-nodes = ["A","B","C","D",]
-positions  = {
-        "A": [0, 0, 0],
-        "B": [4, 0, 0],
-        "C": [2, 2, 0],
-        "D": [4, 4, 0],
-        }
-edges = [
-        ("A","B",4),
-        ("A","C",2.82843),
-        ("A","D",5.65685),
-        ("B","A",4),
-        ("B","C",2.82843),
-        ("B","D",4),
-        ("C","A",2.82843),
-        ("C","B",2.82843),
-        ("C","D",2.82843),
-        ("D","A",5.65685),
-        ("D","B",4),
-        ("D","C",2.82843),
-        ]
-distances = {"A":0,"B":4,"C":2.82843,"D":5.65685,}
-previous = {"A":None,"B":"A","C":"A","D":"A",}
-shortest_path = ["A","B",]
-
 # Data_E
 
 num_nodes = len(nodes)

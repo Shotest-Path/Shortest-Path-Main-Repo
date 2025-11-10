@@ -81,7 +81,7 @@ void ConvexAndConcave::onRunConvexAndConcaveClick()
             }
             double len = 0;
             for(auto element :theFinalpath.distances){
-                if(element.first==theFinalpath.endNode)
+                if(element.first==endPoint)
                 len += element.second;
             }
             shortestPathText+= (" => (" + to_string(len) + ")");
@@ -123,7 +123,7 @@ void ConvexAndConcave::onRunConvexAndConcaveClick()
             }
             double len = 0;
             for(auto element :theFinalpath.distances){
-                if(element.first==theFinalpath.endNode)
+                if(element.first==endPoint)
                     len += element.second;
             }
             shortestPathText+= (" => (" + to_string(len) + ")");
