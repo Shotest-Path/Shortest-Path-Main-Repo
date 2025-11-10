@@ -75,25 +75,7 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
     for (const auto& element : shortest_path) {
         outputFile << "\"" << QString(1, element) << "\",";
     }
-    GraphGeometry G;
-
     outputFile << "]\n";
-    outputFile << "coordinates = {";
-    if (isShortest) {
-        map<char, array<double, 3>> points = G.generateNodePositions(ShortestPathGraph);
-        for (const auto& element : points) {
-            outputFile << "\"" << element.first << "\": np.array(["
-                       << element.second[0] << ", "
-                       << element.second[1] << ", "
-                       << element.second[2] << "]),";
-        }
-    } else {
-        for (const auto& element : thePoitsOfHoleGraph) {
-            outputFile << "\"" << element.first << "\": np.array(["
-                       << element.second.first << ", "
-                       << element.second.second << ", 0]),";
-        }
-    }
-    outputFile << "}\n";
+
     file.close();
 }

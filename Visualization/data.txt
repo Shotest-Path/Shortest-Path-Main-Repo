@@ -1,13 +1,18 @@
-nodes = ["A","B","C",]
+nodes = ["A","B","C","D","E",]
 edges = [
-        ("A","B",2),
-        ("A","C",7),
-        ("B","A",2),
-        ("B","C",4),
-        ("C","A",7),
-        ("C","B",4),
+        ("A","B",3),
+        ("A","C",5),
+        ("B","A",3),
+        ("B","C",2),
+        ("B","D",4),
+        ("C","A",5),
+        ("C","B",2),
+        ("C","E",6),
+        ("D","B",4),
+        ("D","E",1),
+        ("E","C",6),
+        ("E","D",1),
         ]
-distances = {"A":0,"B":2,"C":6,}
-previous = {"A":None,"B":"A","C":"B",}
-shortest_path = ["A","B",]
-coordinates = {"A": np.array([10, 0, 0]),"B": np.array([-5, 8.66025, 0]),"C": np.array([-5, -8.66025, 0]),}
+distances = {"A":0,"B":3,"C":5,"D":7,"E":8,}
+previous = {"A":None,"B":"A","C":"A","D":"B","E":"D",}
+shortest_path = ["A","B","D","E",]
