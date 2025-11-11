@@ -16,6 +16,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPlainTextEdit>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
@@ -28,11 +29,11 @@ class Ui_Result
 public:
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout_4;
+    QPushButton *pauseButton;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *stopButton;
     QPushButton *playButton;
     QVBoxLayout *verticalLayout;
-    QPushButton *pauseButton;
-    QPushButton *stopButton;
-    QSpacerItem *horizontalSpacer;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPlainTextEdit *pythonOutputConsole;
@@ -43,6 +44,7 @@ public:
     QLabel *label;
     QLabel *shortestPathResultLabel;
     QSpacerItem *horizontalSpacer_4;
+    QProgressBar *progressBar;
 
     void setupUi(QDialog *Result)
     {
@@ -52,10 +54,24 @@ public:
         Result->setMinimumSize(QSize(1100, 900));
         gridLayoutWidget = new QWidget(Result);
         gridLayoutWidget->setObjectName("gridLayoutWidget");
-        gridLayoutWidget->setGeometry(QRect(30, 50, 1051, 691));
+        gridLayoutWidget->setGeometry(QRect(40, 50, 1051, 691));
         gridLayout_4 = new QGridLayout(gridLayoutWidget);
         gridLayout_4->setObjectName("gridLayout_4");
         gridLayout_4->setContentsMargins(0, 0, 0, 0);
+        pauseButton = new QPushButton(gridLayoutWidget);
+        pauseButton->setObjectName("pauseButton");
+
+        gridLayout_4->addWidget(pauseButton, 1, 0, 1, 1);
+
+        horizontalSpacer = new QSpacerItem(10, 10, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Fixed);
+
+        gridLayout_4->addItem(horizontalSpacer, 5, 0, 1, 2);
+
+        stopButton = new QPushButton(gridLayoutWidget);
+        stopButton->setObjectName("stopButton");
+
+        gridLayout_4->addWidget(stopButton, 3, 0, 1, 2);
+
         playButton = new QPushButton(gridLayoutWidget);
         playButton->setObjectName("playButton");
 
@@ -66,23 +82,9 @@ public:
 
         gridLayout_4->addLayout(verticalLayout, 0, 0, 1, 2);
 
-        pauseButton = new QPushButton(gridLayoutWidget);
-        pauseButton->setObjectName("pauseButton");
-
-        gridLayout_4->addWidget(pauseButton, 1, 0, 1, 1);
-
-        stopButton = new QPushButton(gridLayoutWidget);
-        stopButton->setObjectName("stopButton");
-
-        gridLayout_4->addWidget(stopButton, 3, 1, 1, 1);
-
-        horizontalSpacer = new QSpacerItem(10, 30, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Fixed);
-
-        gridLayout_4->addItem(horizontalSpacer, 4, 0, 1, 2);
-
         horizontalLayoutWidget = new QWidget(Result);
         horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
-        horizontalLayoutWidget->setGeometry(QRect(30, 740, 1051, 151));
+        horizontalLayoutWidget->setGeometry(QRect(40, 740, 1051, 151));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -94,7 +96,7 @@ public:
 
         horizontalLayoutWidget_3 = new QWidget(Result);
         horizontalLayoutWidget_3->setObjectName("horizontalLayoutWidget_3");
-        horizontalLayoutWidget_3->setGeometry(QRect(210, 10, 601, 41));
+        horizontalLayoutWidget_3->setGeometry(QRect(240, 10, 601, 41));
         horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_3);
         horizontalLayout_2->setObjectName("horizontalLayout_2");
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -125,6 +127,15 @@ public:
 
         horizontalLayout_2->addLayout(horizontalLayout_4);
 
+        progressBar = new QProgressBar(Result);
+        progressBar->setObjectName("progressBar");
+        progressBar->setGeometry(QRect(10, 50, 24, 841));
+        progressBar->setValue(0);
+        progressBar->setAlignment(Qt::AlignmentFlag::AlignCenter);
+        progressBar->setTextVisible(true);
+        progressBar->setOrientation(Qt::Orientation::Vertical);
+        progressBar->setInvertedAppearance(false);
+        progressBar->setTextDirection(QProgressBar::Direction::TopToBottom);
 
         retranslateUi(Result);
 
@@ -134,9 +145,9 @@ public:
     void retranslateUi(QDialog *Result)
     {
         Result->setWindowTitle(QCoreApplication::translate("Result", "Dialog", nullptr));
-        playButton->setText(QCoreApplication::translate("Result", "Play", nullptr));
         pauseButton->setText(QCoreApplication::translate("Result", "Pause", nullptr));
         stopButton->setText(QCoreApplication::translate("Result", "Stop", nullptr));
+        playButton->setText(QCoreApplication::translate("Result", "Play", nullptr));
         label->setText(QCoreApplication::translate("Result", "Shortest Path: ", nullptr));
         shortestPathResultLabel->setText(QCoreApplication::translate("Result", "Shortest Path", nullptr));
     } // retranslateUi

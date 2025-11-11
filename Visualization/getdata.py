@@ -11,5 +11,3 @@ new_code = code.replace(
 
 with open(r"main_animation.py", "w") as program:
     program.write(new_code)
-
-exit(0)

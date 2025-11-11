@@ -20,6 +20,7 @@ public:
 signals:
     void progressUpdate(const QString &message);
     void allScriptsFinished();
+    void progressChanged(int value);
 
 private slots:
     void runNext();
@@ -33,6 +34,9 @@ private:
     int currentIndex;
     QPlainTextEdit *output;
     QLabel *labelOutput;
+    QList<int> progressRanges;
+    int progressOffset;
+    int currentProgress;
 };
 
 #endif // PYTHONRUNNER_H

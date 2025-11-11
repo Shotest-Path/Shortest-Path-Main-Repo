@@ -1,30 +1,8 @@
 from manim import *
 import numpy as np
+import sys
 
 # Data_S
-nodes = ["A","B","C","D",]
-edges = [
-        ("A","B",5.65685),
-        ("A","C",3.16228),
-        ("A","D",4),
-        ("B","A",5.65685),
-        ("B","C",3.16228),
-        ("C","A",3.16228),
-        ("C","B",3.16228),
-        ("C","D",1.41421),
-        ("D","A",4),
-        ("D","C",1.41421),
-        ]
-distances = {"A":0,"B":5.65685,"C":3.16228,"D":4,}
-previous = {"A":None,"B":"A","C":"A","D":"A",}
-shortest_path = ["A","B",]
-predefined_coordinates={
-        "A":np.array([0, 0, 0]),
-        "B":np.array([4, 4, 0]),
-        "C":np.array([3, 1, 0]),
-        "D":np.array([4, 0, 0]),
-        }
-
 # Data_E
 
 num_nodes = len(nodes)
@@ -103,14 +81,21 @@ class DijkstraGraph:
 
 class DynamicGraphScene(MovingCameraScene):
     def construct(self):
+        def print_progress(progress):
+            print(f"PROGRESS: {progress}")
+            sys.stdout.flush()
+
+        print_progress(0)
 
         title = Text("Shortest Path Visualization", weight=BOLD).scale(0.6)
         title.to_edge(UP)
         self.play(Create(title, shift=UP), run_time=1)
         self.wait(0.4)
+        print_progress(10)
 
         self.play(FadeOut(title, shift=UP), run_time=1)
         self.wait(0.3)
+        print_progress(20)
 
         G = DijkstraGraph(nodes, edges, coordinates)
         points = G.items_nodes_only()
@@ -140,9 +125,11 @@ class DynamicGraphScene(MovingCameraScene):
         self.play(LaggedStartMap(Create, grid_lines, lag_ratio=0.15), run_time=1.6)
         self.play(LaggedStartMap(DrawBorderThenFill, table.get_rows(), lag_ratio=0.18), run_time=1.8)
         self.wait(1.0)
+        print_progress(40)
 
         # Zoom in on graph
         self.play(self.camera.frame.animate.move_to(points.get_center()).set_width(points.get_width() * 2))
+        print_progress(50)
 
         G.build_edges()
         nodes_group, lines_group, weights_group, lines = G.items_all()
@@ -151,10 +138,12 @@ class DynamicGraphScene(MovingCameraScene):
         self.play(LaggedStartMap(Create, lines_group, lag_ratio=0.18), run_time=2.0)
         self.play(LaggedStartMap(DrawBorderThenFill, weights_group, lag_ratio=0.2), run_time=1.4)
         self.wait(0.3)
+        print_progress(70)
 
         self.add_foreground_mobject(weights_group)
 
-        for i in range(len(shortest_path) - 1):
+        num_segments = len(shortest_path) - 1
+        for i in range(num_segments):
             a, b = shortest_path[i], shortest_path[i + 1]
             if (a, b) in lines:
                 original_line = lines[(a, b)]
@@ -166,7 +155,11 @@ class DynamicGraphScene(MovingCameraScene):
                 )
                 self.play(Create(red_line), run_time=1.0)
                 self.wait(0.25)
+                progress = 70 + int(((i + 1) / num_segments) * 20)
+                print_progress(progress)
 
         self.wait(0.8)
+        print_progress(90)
 
         self.wait(2.5)
+        print_progress(100)

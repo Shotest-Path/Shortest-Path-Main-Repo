@@ -5,8 +5,10 @@
 #include <QTextStream>
 #include <QCoreApplication>
 #include <QDebug>
+#include <iomanip>
 #include "generateTheCoordinates.h"
 #include "pythonrunner.h"
+
 
 using namespace std;
 
@@ -18,7 +20,7 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
                         map<char ,pair<double,double>> thePoitsOfHoleGraph =  {}
                              )
 {
-    QString appdir = "C:/Users/boody/Desktop/git_learn/Shortest-Path-Main-Repo/Visualization";
+    QString appdir = "C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization";
 
     QDir dir(appdir);
 
@@ -94,14 +96,14 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
         for (const auto& element : ShortestPathGraph) {
             for (const auto& i : element.second) {
                 outputFile << "        (\"" << QString(1, element.first) << "\",\""
-                           << QString(1, i.first) << "\"," << i.second << "),\n";
+                           << QString(1, i.first) << "\"," <<  QString::number(i.second, 'f',1) << "),\n";
             }
         }
         outputFile << "        ]\n";
 
         outputFile << "distances = {";
         for (const auto& dist : distances) {
-            outputFile << "\"" << QString(1, dist.first) << "\":" << dist.second << ",";
+            outputFile << "\"" << QString(1, dist.first) << "\":" <<  QString::number(dist.second,'f',1) << ",";
         }
         outputFile << "}\n";
 
@@ -125,7 +127,8 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
         outputFile << "predefined_coordinates={\n";
         for (const auto& element : thePoitsOfHoleGraph) {
             outputFile << "        \"" << QString(1, element.first) << "\":np.array(["
-                       <<element.second.first << ", " << element.second.second << ", 0]),\n";
+                       << element.second.first << ", "
+                       << element.second.second << ", 0]),\n";
         }
         outputFile << "        }\n";
 

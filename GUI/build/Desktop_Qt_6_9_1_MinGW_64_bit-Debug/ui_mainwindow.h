@@ -70,7 +70,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 300, 29));
+        menubar->setGeometry(QRect(0, 0, 300, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -85,7 +85,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         shortestPathButton->setText(QCoreApplication::translate("MainWindow", "Shortest Path", nullptr));
-        convexAndConcaveButton->setText(QCoreApplication::translate("MainWindow", "Convev And Concave", nullptr));
+        convexAndConcaveButton->setText(QCoreApplication::translate("MainWindow", "Concave And Convex", nullptr));
     } // retranslateUi
 
 };

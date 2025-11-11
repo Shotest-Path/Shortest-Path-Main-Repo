@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QMediaPlayer>
 #include <QVideoWidget>
+#include <QPropertyAnimation>
 #include "pythonrunner.h"
 
 namespace Ui {
@@ -24,6 +25,7 @@ public:
 
 private slots:
     void onVideoReady();
+    void onProgressChanged(int value);
 
 private:
     Ui::Result *ui;
