@@ -33,6 +33,15 @@ FORMS += \
     result.ui \
     shortestpath.ui
 
+RESOURCES += resources.qrc
+
+win32 {
+    RC_FILE = geometry.rc
+}
+macx {
+    ICON = icons/app.icns
+}
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
