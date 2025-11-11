@@ -8,7 +8,7 @@
 #include <QStringList>
 
 
- inline bool isConvexAndConcave =false;
+inline bool isConvexAndConcave =false;
 class PythonRunner : public QObject {
     Q_OBJECT
 

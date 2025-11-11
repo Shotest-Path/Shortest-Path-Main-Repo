@@ -151,7 +151,7 @@ public:
 
     void retranslateUi(QDialog *ConvexAndConcave)
     {
-        ConvexAndConcave->setWindowTitle(QCoreApplication::translate("ConvexAndConcave", "Dialog", nullptr));
+        ConvexAndConcave->setWindowTitle(QCoreApplication::translate("ConvexAndConcave", "ConvexandConcave", nullptr));
         label_3->setText(QCoreApplication::translate("ConvexAndConcave", "End Point:", nullptr));
         runConvexAndConcaveButton->setText(QCoreApplication::translate("ConvexAndConcave", "RUN", nullptr));
         label_4->setText(QCoreApplication::translate("ConvexAndConcave", "Start Point:", nullptr));

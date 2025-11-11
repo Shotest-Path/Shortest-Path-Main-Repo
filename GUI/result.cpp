@@ -20,6 +20,7 @@ Result::Result(QWidget *parent)
 
     QString shortestPathTextGlobal = Result::shortestPathResult;
     ui->shortestPathResultLabel->setText(shortestPathTextGlobal);
+
     pythonRunner = new PythonRunner(ui->pythonOutputConsole, this);
     connect(pythonRunner, &PythonRunner::allScriptsFinished, this, &Result::onVideoReady);
     connect(pythonRunner, &PythonRunner::progressChanged, this, &Result::onProgressChanged);

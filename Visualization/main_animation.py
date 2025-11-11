@@ -132,7 +132,6 @@ class DynamicGraphScene(MovingCameraScene):
         self.wait(1.0)
         print_progress(40)
 
-        # Zoom in on graph
         self.play(self.camera.frame.animate.move_to(points.get_center()).set_width(points.get_width() * 2))
         print_progress(50)
 

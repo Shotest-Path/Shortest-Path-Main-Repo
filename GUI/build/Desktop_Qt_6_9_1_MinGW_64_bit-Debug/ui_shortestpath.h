@@ -138,7 +138,7 @@ public:
 
     void retranslateUi(QDialog *ShortestPath)
     {
-        ShortestPath->setWindowTitle(QCoreApplication::translate("ShortestPath", "Dialog", nullptr));
+        ShortestPath->setWindowTitle(QCoreApplication::translate("ShortestPath", "ShortestPath", nullptr));
         label_2->setText(QCoreApplication::translate("ShortestPath", "End Node:", nullptr));
         label->setText(QCoreApplication::translate("ShortestPath", "Start Node:", nullptr));
         runButton->setText(QCoreApplication::translate("ShortestPath", "RUN", nullptr));

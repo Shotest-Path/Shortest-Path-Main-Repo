@@ -15,6 +15,7 @@ ShortestPath::ShortestPath(QWidget *parent)
     , resultObject(new Result())
 {
     ui->setupUi(this);
+
     connect(ui->addNodeButton,&QPushButton::clicked,this,&ShortestPath::onAddNodeClick);
     connect(ui->runButton,&QPushButton::clicked,this,&ShortestPath::onRunClick);
     ui->fristNodeNameLineEdit->setPlaceholderText("Enter the frist node name");
@@ -96,9 +97,8 @@ void ShortestPath::onRunClick()
     time = new QTimer(this);
     time->start();
 
-    // hide();
     resultObject->returnShortestPathResult(shortestPathTextGlobal);
-    // resultObject->show();
+
     resultObject->startPythonRunner();
 
     time->stop();

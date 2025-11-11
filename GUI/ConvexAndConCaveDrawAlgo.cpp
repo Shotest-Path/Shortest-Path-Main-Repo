@@ -12,8 +12,8 @@ using namespace std;
 class Polygon
 {
 private:
-    map<char, pair<double, double>> Vertices;          // Example input: A 3 6  -> A(3,6)
-             // Example output: A-B = 4.6 (complete graph)
+    map<char, pair<double, double>> Vertices;          
+             
     string Type;
 
 public:
@@ -22,25 +22,11 @@ public:
     map<char, map<char, double>> get_edges() { return Edges; }
     string get_type() { return Type; }
 
-    // Read the polygon points and type
-   /* void read(int n)
-    {
-        int x, y;
-        char pointname;
-        for (int i = 0; i < n; i++)
-        {
-            cin >> pointname >> x >> y;
-            Vertices[pointname] = { x, y };
-        }
-    }*/
-
-    // Calculate distance between two points
     double calcDistance(pair<double, double> p1, pair<double, double> p2)
     {
         return hypot(p2.first - p1.first, p2.second - p1.second);
     }
 
-    // Build complete graph (Convex)
     map<char, map<char, double>> GetConvex(map<char ,pair<double,double>> thePoints)
     {
         vector<pair<char, pair<double, double>>> points;
@@ -70,14 +56,12 @@ public:
         return Edges;
     }
 
-    // Cross product function
     int crossProduct(pair<double, double> O, pair<double, double> A, pair<double, double> B)
     {
         return (A.first - O.first) * (B.second - O.second)
         - (A.second - O.second) * (B.first - O.first);
     }
 
-    // Compute convex hull using Graham's scan
     vector<pair<double, double>> getConvexHull()
     {
         vector<pair<double, double>> pts;
@@ -117,7 +101,6 @@ public:
     }
 
 
-    // Check if two line segments (p1,p2) and (p3,p4) intersect
     bool onSegment(pair<double,double> p, pair<double,double> q, pair<double,double> r)
     {
         return (q.first <= max(p.first, r.first) && q.first >= min(p.first, r.first) &&
@@ -130,8 +113,8 @@ public:
         auto orientation = [](pair<double, double> a, pair<double, double> b, pair<double, double> c) {
             double val = (b.second - a.second) * (c.first - b.first) -
                          (b.first - a.first) * (c.second - b.second);
-            if (fabs(val) < 1e-9) return 0; // collinear (مع تحمل صغير للأخطاء العددية)
-            return (val > 0) ? 1 : 2; // 1: clockwise, 2: counterclockwise
+            if (fabs(val) < 1e-9) return 0; 
+            return (val > 0) ? 1 : 2; 
         };
 
         int o1 = orientation(p1, p2, p3);
@@ -139,11 +122,11 @@ public:
         int o3 = orientation(p3, p4, p1);
         int o4 = orientation(p3, p4, p2);
 
-        // الحالة العامة
+        
         if (o1 != o2 && o3 != o4)
             return true;
 
-        // الحالات الخاصة (تلامس أو تطابق)
+        
         if (o1 == 0 && onSegment(p1, p3, p2)) return true;
         if (o2 == 0 && onSegment(p1, p4, p2)) return true;
         if (o3 == 0 && onSegment(p3, p1, p4)) return true;
@@ -153,7 +136,6 @@ public:
     }
 
 
-    // Check visibility between two vertices inside polygon
     bool visible(char a, char b)
     {
         pair<double, double> A = Vertices[a];
@@ -173,7 +155,6 @@ public:
         return true;
     }
 
-    // Repair polygon using 2-opt swaps
     void repair()
     {
         vector<pair<char, pair<int, int>>> points;
@@ -201,7 +182,6 @@ public:
             }
         }
 
-        // Update Vertices & Edges after fixing
         Vertices.clear();
         for (auto& p : points)
             Vertices[p.first] = p.second;

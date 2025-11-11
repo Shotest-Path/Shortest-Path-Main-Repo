@@ -50,8 +50,10 @@ public:
     {
         if (Result->objectName().isEmpty())
             Result->setObjectName("Result");
+        Result->setWindowModality(Qt::WindowModality::NonModal);
         Result->resize(1100, 900);
         Result->setMinimumSize(QSize(1100, 900));
+        Result->setAutoFillBackground(false);
         gridLayoutWidget = new QWidget(Result);
         gridLayoutWidget->setObjectName("gridLayoutWidget");
         gridLayoutWidget->setGeometry(QRect(40, 50, 1051, 691));
@@ -117,6 +119,7 @@ public:
         shortestPathResultLabel = new QLabel(horizontalLayoutWidget_3);
         shortestPathResultLabel->setObjectName("shortestPathResultLabel");
         shortestPathResultLabel->setFont(font);
+        shortestPathResultLabel->setStyleSheet(QString::fromUtf8("text-transform: uppercase;"));
 
         horizontalLayout_4->addWidget(shortestPathResultLabel);
 
@@ -144,7 +147,7 @@ public:
 
     void retranslateUi(QDialog *Result)
     {
-        Result->setWindowTitle(QCoreApplication::translate("Result", "Dialog", nullptr));
+        Result->setWindowTitle(QCoreApplication::translate("Result", "Result", nullptr));
         pauseButton->setText(QCoreApplication::translate("Result", "Pause", nullptr));
         stopButton->setText(QCoreApplication::translate("Result", "Stop", nullptr));
         playButton->setText(QCoreApplication::translate("Result", "Play", nullptr));

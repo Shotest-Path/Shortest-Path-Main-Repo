@@ -5,20 +5,18 @@
 #include <QTextStream>
 #include <QCoreApplication>
 #include <QDebug>
-#include <iomanip>
-#include "generateTheCoordinates.h"
 #include "pythonrunner.h"
 
 
 using namespace std;
 
 inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGraph,
-                      const map<char, double>& distances,
-                      const map<char, char>& prev,
-                      const vector<char>& shortest_path,
-                             bool isShortest = true,
-                        map<char ,pair<double,double>> thePoitsOfHoleGraph =  {}
-                             )
+      const map<char, double>& distances,
+      const map<char, char>& prev,
+      const vector<char>& shortest_path,
+        bool isShortest = true,
+        map<char ,pair<double,double>> thePoitsOfHoleGraph =  {}
+    )
 {
     QString appdir = "C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization";
 
@@ -43,7 +41,6 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
     QTextStream outputFile(&file);
     outputFile << "nodes = [";
     for (const auto& element : ShortestPathGraph) {
-        // element.first is char; convert to QString safely
         outputFile << "\"" << QString(1, element.first) << "\",";
     }
     outputFile << "]\n";
@@ -87,7 +84,6 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
         QTextStream outputFile(&file);
         outputFile << "nodes = [";
         for (const auto& element : ShortestPathGraph) {
-            // element.first is char; convert to QString safely
             outputFile << "\"" << QString(1, element.first) << "\",";
         }
         outputFile << "]\n";

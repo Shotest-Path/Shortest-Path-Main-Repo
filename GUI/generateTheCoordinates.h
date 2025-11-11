@@ -8,7 +8,7 @@
 #include <array>
 class GraphGeometry {
 public:
-    // Returns true if distance found between two nodes
+
     static bool getDistanceBetweenNodes(
         const std::map<char, std::map<char, double>>& graph,
         char firstNode,
