@@ -114,16 +114,21 @@ class DynamicGraphScene(MovingCameraScene):
             v_buff=0.4
         ).scale(0.4)
 
-        table.to_corner(UP + LEFT)
-        table.shift(DOWN * 0.8)
-        
-        points.next_to(table, RIGHT, buff=5)
+        table_title = Text("Table", weight=BOLD).scale(0.5)
+        table_group = VGroup(table_title, table)
+        table_group.arrange(DOWN, buff=0.3)
 
-        self.camera.frame.move_to(VGroup(table, points).get_center()).set_width(VGroup(table, points).get_width() * 1.2)
+        table_group.to_corner(UP + LEFT)
+        table_group.shift(DOWN * 0.8)
+        
+        points.next_to(table_group, RIGHT, buff=5)
+
+        self.camera.frame.move_to(VGroup(table_group, points).get_center()).set_width(VGroup(table_group, points).get_width() * 1.2)
 
         grid_lines = VGroup(*table.get_horizontal_lines(), *table.get_vertical_lines())
         self.play(LaggedStartMap(Create, grid_lines, lag_ratio=0.15), run_time=1.6)
-        self.play(LaggedStartMap(DrawBorderThenFill, table.get_rows(), lag_ratio=0.18), run_time=1.8)
+        self.play(Write(table_title))
+        self.play(LaggedStartMap(DrawBorderThenFill, table.get_rows()[::1], lag_ratio=0.18), run_time=1.8)
         self.wait(1.0)
         print_progress(40)
 
@@ -160,6 +165,8 @@ class DynamicGraphScene(MovingCameraScene):
 
         self.wait(0.8)
         print_progress(90)
+
+        self.play(self.camera.frame.animate.move_to(VGroup(table, points).get_center()).set_width(VGroup(table, points).get_width() * 1.2))
 
         self.wait(2.5)
         print_progress(100)
