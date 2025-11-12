@@ -29,7 +29,7 @@ else:
         angles = (np.linspace(0, 2 * np.pi, num_other_nodes, endpoint=False) + np.pi / 4) if num_other_nodes > 0 else []
 
         for i, node in enumerate(other_nodes):
-            dist = distances.get(node, 1)  # Use distance from source, with a default.
+            dist = distances.get(node, 1)
             coordinates[node] = np.array([
                 dist * scaling_factor * np.cos(angles[i]),
                 dist * scaling_factor * np.sin(angles[i]),
@@ -92,10 +92,11 @@ class DijkstraGraph:
             self.lines_group.add(line)
 
             mid = (start_trim + end_trim) / 2
+
             weight_label = LabeledDot(
-                Tex(str(w), font_size=24, color="#000000"),
-                radius=0.2,
-                color="#FFFFFF"
+                Tex(str(w), font_size=20, color="#000000FF"),
+                radius=0.17,
+                color="#FFFFFFFF"
             ).move_to(mid)
             self.weights_group.add(weight_label)
 
@@ -165,10 +166,11 @@ class DynamicGraphScene(MovingCameraScene):
         G.build_edges()
         nodes_group, lines_group, weights_group, lines = G.items_all()
         self.play(LaggedStartMap(DrawBorderThenFill, points, lag_ratio=0.25), run_time=1.5)
-        self.wait(0.2)
+        self.wait(0.5)
         self.play(LaggedStartMap(Create, lines_group, lag_ratio=0.18), run_time=2.0)
-        self.play(LaggedStartMap(DrawBorderThenFill, weights_group, lag_ratio=0.2), run_time=1.4)
-        self.wait(0.3)
+        self.wait(1.5)
+        self.play(LaggedStartMap(FadeIn, weights_group, lag_ratio=0.25), run_time=3.0)
+        self.wait(1.7)
         print_progress(70)
 
         self.add_foreground_mobject(weights_group)
