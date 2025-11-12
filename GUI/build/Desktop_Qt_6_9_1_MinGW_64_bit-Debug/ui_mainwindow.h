@@ -40,6 +40,7 @@ public:
         MainWindow->resize(300, 400);
         MainWindow->setMinimumSize(QSize(300, 0));
         MainWindow->setMaximumSize(QSize(600, 400));
+        MainWindow->setTabShape(QTabWidget::TabShape::Triangular);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         verticalLayout_2 = new QVBoxLayout(centralwidget);
