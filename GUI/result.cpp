@@ -36,7 +36,7 @@ Result::Result(QWidget *parent)
 }
 
 void Result::onVideoReady() {
-    QString base_videoPath ="C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization/media/videos";
+    QString base_videoPath ="E:/workspace/Geometry Project for windows/Shortest-Path-Main-Repo/Visualization/media/videos";
 
     if(isConvexAndConcave==false)
         {

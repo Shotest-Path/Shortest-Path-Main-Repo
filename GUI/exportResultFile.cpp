@@ -18,7 +18,7 @@ inline void exportResultFile(const map<char, map<char, double>>& ShortestPathGra
         map<char ,pair<double,double>> thePoitsOfHoleGraph =  {}
     )
 {
-    QString appdir = "C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization";
+    QString appdir = "E:/workspace/Geometry Project for windows/Shortest-Path-Main-Repo/Visualization";
 
     QDir dir(appdir);
 

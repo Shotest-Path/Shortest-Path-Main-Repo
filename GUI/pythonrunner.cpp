@@ -44,8 +44,9 @@ void PythonRunner::start()
     currentProgress = 0;
     progressRanges = {0, 80, 20};
     progressOffset = 0;
-    QString basePath = "C:/Users/Hp/OneDrive/Documents/4th Year/1st Term/Comp 411 Computational Geometry/Project/Visualization";
+    QString basePath = "E:/workspace/Geometry Project for windows/Shortest-Path-Main-Repo/Visualization";
     if(isConvexAndConcave==false)
+
     {
         scripts = {
             basePath + "/getdata.py",

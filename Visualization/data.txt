@@ -1,12 +1,12 @@
 nodes = ["A","B","C",]
 edges = [
         ("A","B",2),
-        ("A","C",5),
+        ("A","C",1),
         ("B","A",2),
-        ("B","C",4),
-        ("C","A",5),
-        ("C","B",4),
+        ("B","C",2),
+        ("C","A",1),
+        ("C","B",2),
         ]
-distances = {"A":0,"B":2,"C":5,}
+distances = {"A":0,"B":2,"C":1,}
 previous = {"A":None,"B":"A","C":"A",}
-shortest_path = ["A","B",]
+shortest_path = ["A","C",]

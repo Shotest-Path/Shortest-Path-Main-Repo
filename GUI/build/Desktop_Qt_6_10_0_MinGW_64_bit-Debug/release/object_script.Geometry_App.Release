@@ -1,0 +1,11 @@
+release/convexandconcave.o
+release/main.o
+release/mainwindow.o
+release/pythonrunner.o
+release/result.o
+release/qrc_resources.o
+release/moc_convexandconcave.o
+release/moc_mainwindow.o
+release/moc_pythonrunner.o
+release/moc_result.o
+release/moc_shortestpath.o
